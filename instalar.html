@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Instalar Posicionamento RM</title>
+<meta name="description" content="Instale o Posicionamento RM no iPhone, iPad ou Android. Funciona offline.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="theme-color" content="#04070d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Posicionamento RM">
+<meta property="og:title" content="Posicionamento RM — instalar">
+<meta property="og:description" content="Planejamento de exames de RM no seu bolso. Offline, sem anúncios.">
+<meta property="og:image" content="icon-512.png">
+<style>
+:root{--bg:#04070d;--card:#0b1a2e;--line:#1d3557;--fg:#eef6ff;--sub:#9fbcd6;--acc:#2fd6ff;--ok:#3ddc97}
+*{box-sizing:border-box;margin:0}
+body{background:radial-gradient(700px 500px at 90% -10%,#0d2f55,transparent 70%),var(--bg);color:var(--fg);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;min-height:100vh;
+padding:max(28px,env(safe-area-inset-top)) max(18px,env(safe-area-inset-right)) max(36px,env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left))}
+main{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.hero{display:flex;gap:16px;align-items:center}
+.hero img{width:84px;height:84px;border-radius:20px;box-shadow:0 8px 30px rgba(47,214,255,.25)}
+h1{font-size:26px;line-height:1.1;letter-spacing:-.01em}
+.by{color:var(--sub);font-size:14px;margin-top:4px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{font-size:13px;font-weight:600;padding:6px 10px;border-radius:99px;border:1px solid var(--line);background:rgba(255,255,255,.04)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}
+.card h2{font-size:17px;margin-bottom:12px}
+ol{list-style:none;padding:0;display:flex;flex-direction:column;gap:12px;counter-reset:s}
+ol li{counter-increment:s;display:flex;gap:12px;align-items:flex-start;color:var(--sub)}
+ol li b{color:var(--fg)}
+ol li:before{content:counter(s);flex:0 0 28px;height:28px;border-radius:50%;background:var(--acc);color:#04070d;font-weight:800;display:grid;place-items:center;font-size:14px}
+.btn{display:block;text-align:center;text-decoration:none;font-weight:700;font-size:17px;padding:15px;border-radius:14px;background:var(--acc);color:#04070d;border:0;width:100%;cursor:pointer}
+.ico{display:inline-block;vertical-align:-4px}
+.note{font-size:13px;color:var(--sub)}
+#status{font-size:14px;color:var(--sub);display:flex;gap:8px;align-items:center}
+#status i{width:10px;height:10px;border-radius:50%;background:#f5b942;flex:0 0 10px}
+#status.ok i{background:var(--ok)}
+.hide{display:none!important}
+.warn{border-color:#f5b942}
+footer{font-size:12px;color:var(--sub);text-align:center;line-height:1.6}
+</style>
+</head>
+<body>
+<main>
+  <div class="hero">
+    <img src="icon-512.png" alt="">
+    <div><h1>Posicionamento RM</h1><div class="by">Nery Solution Medical · Helio Nery</div></div>
+  </div>
+  <div class="tags"><span>36 regiões</span><span>118 planos</span><span>Offline</span><span>Sem anúncios</span><span>Grátis</span></div>
+
+  <div class="card warn hide" id="notSafari">
+    <h2>Abra no Safari</h2>
+    <p class="note">No iPhone a instalação só funciona pelo <b>Safari</b>. Copie este endereço e cole no Safari:</p>
+    <p style="margin-top:10px;word-break:break-all;font-weight:600" id="url"></p>
+  </div>
+
+  <div class="card" id="ios">
+    <h2>Instalar no iPhone ou iPad</h2>
+    <ol>
+      <li><span>Toque em <b>Abrir o app</b> abaixo (no Safari).</span></li>
+      <li><span>Toque em <svg class="ico" width="18" height="22" viewBox="0 0 16 20"><path d="M8 1v12M3.5 5.5 8 1l4.5 4.5M2 9v9h12V9" fill="none" stroke="#2fd6ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> <b>Compartilhar</b> na barra do Safari.</span></li>
+      <li><span>Role e toque em <b>Adicionar à Tela de Início</b> → <b>Adicionar</b>.</span></li>
+      <li><span>Abra o ícone <b>Posicionamento RM</b> na tela inicial. Pronto, funciona até sem internet.</span></li>
+    </ol>
+  </div>
+
+  <div class="card hide" id="android">
+    <h2>Instalar no Android</h2>
+    <button class="btn" id="installBtn">Instalar agora</button>
+    <p class="note" style="margin-top:10px">Ou no menu ⋮ do Chrome toque em <b>Instalar app</b> / <b>Adicionar à tela inicial</b>.</p>
+  </div>
+
+  <a class="btn" href="index.html">Abrir o app</a>
+  <div id="status"><i></i><span>Preparando uso offline…</span></div>
+
+  <p class="note">Uso educacional. Não é dispositivo médico. Não afiliado à GE HealthCare. Não coleta dados: agenda e preferências ficam só no seu aparelho.</p>
+  <footer><a href="https://docs.google.com/document/d/1kCR6cdbVfvshZu2ACQVCKnl4tyNXsGh3e0U78-jVbUw/view" style="color:var(--sub)">Política de Privacidade</a></footer>
+</main>
+<script>
+(function(){
+  var ua=navigator.userAgent;
+  var ios=/iphone|ipad|ipod/i.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  var android=/android/i.test(ua);
+  var safari=ios&&/safari/i.test(ua)&&!/crios|fxios|edgios|opios|gsa\//i.test(ua);
+  document.getElementById('url').textContent=location.href;
+  if(ios&&!safari) document.getElementById('notSafari').classList.remove('hide');
+  if(android){document.getElementById('android').classList.remove('hide');document.getElementById('ios').classList.add('hide');}
+  var deferred=null, b=document.getElementById('installBtn');
+  addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferred=e;});
+  b.addEventListener('click',function(){if(deferred){deferred.prompt();deferred=null}else{location.href='index.html'}});
+  var st=document.getElementById('status');
+  function ok(){st.classList.add('ok');st.querySelector('span').textContent='Pronto para uso offline';}
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('sw.js').then(function(){return navigator.serviceWorker.ready}).then(ok).catch(function(){st.querySelector('span').textContent='Uso offline indisponível neste navegador'});
+  } else st.querySelector('span').textContent='Uso offline indisponível neste navegador';
+})();
+</script>
+</body>
+</html>
