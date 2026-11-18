@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Instalar · Posicionamento em TC</title>
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Posic. TC"><meta name="theme-color" content="#0b1620">
+<style>
+:root{--a:#00e5ff;--b:#8c6bff;--t:#e3f4ff;--m:#8aa3bb}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--t);background:radial-gradient(120% 80% at 50% 0,#16344f 0,#0b1620 60%,#060d14 100%);padding:max(24px,env(safe-area-inset-top)) 20px max(28px,env(safe-area-inset-bottom))}
+.w{max-width:460px;margin:0 auto}.hd{display:flex;gap:14px;align-items:center;margin:8px 0 22px}
+.hd img{width:72px;height:72px;border-radius:18px;box-shadow:0 8px 30px rgba(0,229,255,.25)}
+h1{font-size:22px;margin:0}.sub{color:var(--m);font-size:14px;margin:2px 0 0}
+.card{background:rgba(255,255,255,.05);border:1px solid rgba(0,229,255,.22);border-radius:16px;padding:16px;margin:0 0 14px}
+.card h2{font-size:15px;margin:0 0 10px;color:var(--a);letter-spacing:.04em;text-transform:uppercase}
+ol{margin:0;padding-left:0;list-style:none;counter-reset:s}li{counter-increment:s;display:flex;gap:12px;align-items:flex-start;margin:0 0 12px}
+li:before{content:counter(s);flex:0 0 28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--a),var(--b));color:#041019;font-weight:700;display:grid;place-items:center;font-size:14px}
+.ico{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:7px;background:#1d2d3e;vertical-align:-7px;margin:0 2px}
+.btn{display:block;text-align:center;text-decoration:none;font-weight:700;color:#041019;background:linear-gradient(135deg,var(--a),var(--b));padding:15px;border-radius:14px;margin:6px 0 12px}
+.note{color:var(--m);font-size:13px}.warn{border-color:rgba(255,190,60,.5)}.warn h2{color:#ffbe3c}
+.ok{display:none;border-color:rgba(44,242,163,.5)}.ok h2{color:#2cf2a3}
+</style></head><body><div class="w">
+<div class="hd"><img src="icons/icon-192.png" alt=""><div><h1>Posicionamento em TC</h1><p class="sub">Instalar no iPhone e iPad</p></div></div>
+
+<div class="card warn" id="notSafari"><h2>Abra no Safari</h2><p style="margin:0">No iPhone, a instalação só funciona pelo <b>Safari</b>. Copie este endereço e abra no Safari.</p></div>
+<div class="card ok" id="done"><h2>Instalado</h2><p style="margin:0">O app já está aberto como aplicativo. <a href="index.html" style="color:var(--a)">Entrar</a></p></div>
+
+<div class="card"><h2>Instalar em 4 passos</h2><ol>
+<li><div>Abra esta página no <b>Safari</b> e espere carregar.</div></li>
+<li><div>Toque em <b>Compartilhar</b> <span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 12v8h14v-8"/></svg></span> na barra do Safari (embaixo no iPhone, em cima no iPad).</div></li>
+<li><div>Role a lista e toque em <b>Adicionar à Tela de Início</b> <span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></svg></span>.</div></li>
+<li><div>Toque em <b>Adicionar</b>. O ícone <b>Posic. TC</b> aparece na tela inicial e abre em tela cheia, como um app.</div></li>
+</ol>
+<a class="btn" href="index.html">Abrir o app agora</a>
+<p class="note">Abra o app uma vez com internet: depois ele funciona sem conexão. Em versões novas, basta abrir com internet que ele se atualiza sozinho.</p></div>
+
+<div class="card"><h2>Android</h2><p style="margin:0">Use a versão da Google Play Store (procure "Posicionamento em TC").</p></div>
+<p class="note">Material educativo e de consulta. Desenvolvido por Nery Solution Medical.</p>
+</div>
+<script>
+const ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+const safari=ios&&/Safari/.test(ua)&&!/CriOS|FxiOS|EdgiOS|OPiOS|GSA|Instagram|FBAN|FBAV|Line\//.test(ua);
+const standalone=navigator.standalone||matchMedia('(display-mode: standalone)').matches;
+if(!ios||safari)document.getElementById('notSafari').style.display='none';
+if(standalone){document.getElementById('done').style.display='block';location.replace('index.html');}
+if('serviceWorker' in navigator&&isSecureContext)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script></body></html>
