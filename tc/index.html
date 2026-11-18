@@ -534,6 +534,37 @@ button:focus-visible,.region-item:focus-visible,.plane-item:focus-visible{outlin
 .gx-img svg{position:absolute;inset:0}
 .params-table td{white-space:normal;min-width:64px}
 .pos-row dd .ref-in{margin-top:2px}
+
+.pw-ov{position:fixed;inset:0;z-index:2147483000;background:rgba(2,6,12,.72);backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center}
+.pw-ov.open{display:flex}
+.pw-card{position:relative;width:100%;max-width:520px;max-height:92vh;overflow:auto;background:var(--surface);border:1px solid var(--border-strong);border-radius:22px 22px 0 0;padding:22px 18px calc(18px + env(safe-area-inset-bottom));color:var(--fg);animation:pwUp .28s ease}
+@media(min-width:700px){.pw-ov{align-items:center}.pw-card{border-radius:22px}}
+@keyframes pwUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.pw-x{position:absolute;top:10px;right:12px;width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--fg2);font-size:22px;line-height:1}
+.pw-badge{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.18em;padding:4px 10px;border-radius:999px;background:linear-gradient(90deg,#ffb300,#ff6d00);color:#1a1000;font-weight:700}
+.pw-card h2{margin:10px 0 6px;font-size:22px}.pw-card h2 b{color:#ffb300}
+.pw-why{margin:4px 0 8px;font-size:13.5px;color:var(--fg2);display:flex;gap:6px;align-items:center}
+.pw-ben{list-style:none;margin:12px 0;padding:0;display:grid;gap:10px}
+.pw-ben li{display:flex;flex-direction:column;padding:10px 12px 10px 36px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);position:relative}
+.pw-ben li:before{content:'✓';position:absolute;left:12px;top:10px;color:var(--ok);font-weight:700}
+.pw-ben li span{font-size:12.5px;color:var(--fg2);margin-top:2px}
+.pw-act{display:grid;gap:10px;margin-top:6px}
+.pw-plan{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 10px;width:100%;text-align:left;padding:14px 16px;border-radius:14px;border:1.5px solid var(--border-strong);background:transparent;color:var(--fg);font:inherit;text-decoration:none;cursor:pointer}
+.pw-plan.best{border-color:#ffb300;background:rgba(255,179,0,.09)}
+.pw-pn{font-weight:700;font-size:15px}.pw-pn i{font-style:normal;font-size:11px;margin-left:6px;padding:2px 7px;border-radius:999px;background:#ffb300;color:#1a1000}
+.pw-pp{font-size:13px;color:var(--fg2)}.pw-pp b{font-size:17px;color:var(--fg)}
+.pw-tr{grid-column:1/-1;font-size:12px;color:var(--ok)}
+.pw-link{background:none;border:none;color:var(--accent);font:inherit;font-size:14px;padding:8px;text-decoration:underline;cursor:pointer}
+.pw-fine{font-size:11.5px;line-height:1.4;color:var(--fg3);margin:2px 0 0}
+.pw-err{font-size:12.5px;color:#ff8a80}
+.pw-ok{padding:12px;border-radius:12px;background:var(--ok-bg);color:var(--ok);font-weight:600;display:flex;gap:8px;align-items:center}
+.pw-banner{display:flex;align-items:center;gap:12px;width:calc(100% - 32px);margin:12px 16px 4px;padding:12px 14px;border-radius:14px;border:1px solid rgba(255,179,0,.55);background:linear-gradient(100deg,rgba(255,179,0,.14),rgba(255,109,0,.06));color:var(--fg);font:inherit;text-align:left;cursor:pointer}
+.pw-banner>span:nth-child(2){flex:1;display:flex;flex-direction:column}.pw-banner small{font-size:12px;color:var(--fg2);margin-top:2px}
+.pw-bstar{font-size:22px;color:#ffb300}
+.pw-lock{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:#ffb300;padding:3px 7px;border:1px solid rgba(255,179,0,.5);border-radius:999px;flex-shrink:0}
+.gm-card{position:relative}.gm-card .pw-lock{position:absolute;top:10px;right:10px}
+.region-item.locked .region-thumb,.gm-card.locked .gm-ico{opacity:.55}
+.pw-hdr{color:#ffb300;font-size:18px}.pw-hdr.on{text-shadow:0 0 8px rgba(255,179,0,.8)}
 </style>
 <style>
 .cbr-list{margin:0 16px}
@@ -546,12 +577,74 @@ button:focus-visible,.region-item:focus-visible,.plane-item:focus-visible{outlin
 .jan-pre{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.jan-pre button{cursor:pointer}.jan-pre .on{background:var(--accent);color:var(--on-accent)}
 .jan-v{font:12px var(--mono);color:var(--accent)}
 .cf input[type=range]{width:100%;accent-color:var(--accent)}
+
+.pw-ov{position:fixed;inset:0;z-index:2147483000;background:rgba(2,6,12,.72);backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center}
+.pw-ov.open{display:flex}
+.pw-card{position:relative;width:100%;max-width:520px;max-height:92vh;overflow:auto;background:var(--surface);border:1px solid var(--border-strong);border-radius:22px 22px 0 0;padding:22px 18px calc(18px + env(safe-area-inset-bottom));color:var(--fg);animation:pwUp .28s ease}
+@media(min-width:700px){.pw-ov{align-items:center}.pw-card{border-radius:22px}}
+@keyframes pwUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.pw-x{position:absolute;top:10px;right:12px;width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--fg2);font-size:22px;line-height:1}
+.pw-badge{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.18em;padding:4px 10px;border-radius:999px;background:linear-gradient(90deg,#ffb300,#ff6d00);color:#1a1000;font-weight:700}
+.pw-card h2{margin:10px 0 6px;font-size:22px}.pw-card h2 b{color:#ffb300}
+.pw-why{margin:4px 0 8px;font-size:13.5px;color:var(--fg2);display:flex;gap:6px;align-items:center}
+.pw-ben{list-style:none;margin:12px 0;padding:0;display:grid;gap:10px}
+.pw-ben li{display:flex;flex-direction:column;padding:10px 12px 10px 36px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);position:relative}
+.pw-ben li:before{content:'✓';position:absolute;left:12px;top:10px;color:var(--ok);font-weight:700}
+.pw-ben li span{font-size:12.5px;color:var(--fg2);margin-top:2px}
+.pw-act{display:grid;gap:10px;margin-top:6px}
+.pw-plan{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 10px;width:100%;text-align:left;padding:14px 16px;border-radius:14px;border:1.5px solid var(--border-strong);background:transparent;color:var(--fg);font:inherit;text-decoration:none;cursor:pointer}
+.pw-plan.best{border-color:#ffb300;background:rgba(255,179,0,.09)}
+.pw-pn{font-weight:700;font-size:15px}.pw-pn i{font-style:normal;font-size:11px;margin-left:6px;padding:2px 7px;border-radius:999px;background:#ffb300;color:#1a1000}
+.pw-pp{font-size:13px;color:var(--fg2)}.pw-pp b{font-size:17px;color:var(--fg)}
+.pw-tr{grid-column:1/-1;font-size:12px;color:var(--ok)}
+.pw-link{background:none;border:none;color:var(--accent);font:inherit;font-size:14px;padding:8px;text-decoration:underline;cursor:pointer}
+.pw-fine{font-size:11.5px;line-height:1.4;color:var(--fg3);margin:2px 0 0}
+.pw-err{font-size:12.5px;color:#ff8a80}
+.pw-ok{padding:12px;border-radius:12px;background:var(--ok-bg);color:var(--ok);font-weight:600;display:flex;gap:8px;align-items:center}
+.pw-banner{display:flex;align-items:center;gap:12px;width:calc(100% - 32px);margin:12px 16px 4px;padding:12px 14px;border-radius:14px;border:1px solid rgba(255,179,0,.55);background:linear-gradient(100deg,rgba(255,179,0,.14),rgba(255,109,0,.06));color:var(--fg);font:inherit;text-align:left;cursor:pointer}
+.pw-banner>span:nth-child(2){flex:1;display:flex;flex-direction:column}.pw-banner small{font-size:12px;color:var(--fg2);margin-top:2px}
+.pw-bstar{font-size:22px;color:#ffb300}
+.pw-lock{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:#ffb300;padding:3px 7px;border:1px solid rgba(255,179,0,.5);border-radius:999px;flex-shrink:0}
+.gm-card{position:relative}.gm-card .pw-lock{position:absolute;top:10px;right:10px}
+.region-item.locked .region-thumb,.gm-card.locked .gm-ico{opacity:.55}
+.pw-hdr{color:#ffb300;font-size:18px}.pw-hdr.on{text-shadow:0 0 8px rgba(255,179,0,.8)}
 </style>
 <style>
 .gx-img.anat .gx-mk b{left:-8px;top:-8px;width:16px;height:16px;font-size:9px;box-shadow:0 0 0 2px rgba(0,10,18,.9),0 0 6px #00e5ff}
 .gx-img.anat .gx-mk::before{display:none}
 .lang-sel{appearance:none;-webkit-appearance:none;background:var(--card,rgba(255,255,255,.06));color:inherit;border:1px solid var(--line,rgba(125,149,174,.35));border-radius:10px;font:600 12px/1 'Share Tech Mono',monospace;padding:8px 8px;margin-right:6px;max-width:132px;cursor:pointer;font-family:'Share Tech Mono','Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',monospace}
 .lang-note{margin:10px 16px 0;padding:8px 12px;border-radius:10px;font-size:12.5px;line-height:1.35;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.3);color:var(--txt2,#7d95ae)}
+
+.pw-ov{position:fixed;inset:0;z-index:2147483000;background:rgba(2,6,12,.72);backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center}
+.pw-ov.open{display:flex}
+.pw-card{position:relative;width:100%;max-width:520px;max-height:92vh;overflow:auto;background:var(--surface);border:1px solid var(--border-strong);border-radius:22px 22px 0 0;padding:22px 18px calc(18px + env(safe-area-inset-bottom));color:var(--fg);animation:pwUp .28s ease}
+@media(min-width:700px){.pw-ov{align-items:center}.pw-card{border-radius:22px}}
+@keyframes pwUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.pw-x{position:absolute;top:10px;right:12px;width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--fg2);font-size:22px;line-height:1}
+.pw-badge{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.18em;padding:4px 10px;border-radius:999px;background:linear-gradient(90deg,#ffb300,#ff6d00);color:#1a1000;font-weight:700}
+.pw-card h2{margin:10px 0 6px;font-size:22px}.pw-card h2 b{color:#ffb300}
+.pw-why{margin:4px 0 8px;font-size:13.5px;color:var(--fg2);display:flex;gap:6px;align-items:center}
+.pw-ben{list-style:none;margin:12px 0;padding:0;display:grid;gap:10px}
+.pw-ben li{display:flex;flex-direction:column;padding:10px 12px 10px 36px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);position:relative}
+.pw-ben li:before{content:'✓';position:absolute;left:12px;top:10px;color:var(--ok);font-weight:700}
+.pw-ben li span{font-size:12.5px;color:var(--fg2);margin-top:2px}
+.pw-act{display:grid;gap:10px;margin-top:6px}
+.pw-plan{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 10px;width:100%;text-align:left;padding:14px 16px;border-radius:14px;border:1.5px solid var(--border-strong);background:transparent;color:var(--fg);font:inherit;text-decoration:none;cursor:pointer}
+.pw-plan.best{border-color:#ffb300;background:rgba(255,179,0,.09)}
+.pw-pn{font-weight:700;font-size:15px}.pw-pn i{font-style:normal;font-size:11px;margin-left:6px;padding:2px 7px;border-radius:999px;background:#ffb300;color:#1a1000}
+.pw-pp{font-size:13px;color:var(--fg2)}.pw-pp b{font-size:17px;color:var(--fg)}
+.pw-tr{grid-column:1/-1;font-size:12px;color:var(--ok)}
+.pw-link{background:none;border:none;color:var(--accent);font:inherit;font-size:14px;padding:8px;text-decoration:underline;cursor:pointer}
+.pw-fine{font-size:11.5px;line-height:1.4;color:var(--fg3);margin:2px 0 0}
+.pw-err{font-size:12.5px;color:#ff8a80}
+.pw-ok{padding:12px;border-radius:12px;background:var(--ok-bg);color:var(--ok);font-weight:600;display:flex;gap:8px;align-items:center}
+.pw-banner{display:flex;align-items:center;gap:12px;width:calc(100% - 32px);margin:12px 16px 4px;padding:12px 14px;border-radius:14px;border:1px solid rgba(255,179,0,.55);background:linear-gradient(100deg,rgba(255,179,0,.14),rgba(255,109,0,.06));color:var(--fg);font:inherit;text-align:left;cursor:pointer}
+.pw-banner>span:nth-child(2){flex:1;display:flex;flex-direction:column}.pw-banner small{font-size:12px;color:var(--fg2);margin-top:2px}
+.pw-bstar{font-size:22px;color:#ffb300}
+.pw-lock{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:#ffb300;padding:3px 7px;border:1px solid rgba(255,179,0,.5);border-radius:999px;flex-shrink:0}
+.gm-card{position:relative}.gm-card .pw-lock{position:absolute;top:10px;right:10px}
+.region-item.locked .region-thumb,.gm-card.locked .gm-ico{opacity:.55}
+.pw-hdr{color:#ffb300;font-size:18px}.pw-hdr.on{text-shadow:0 0 8px rgba(255,179,0,.8)}
 </style>
 
 <div id="app">
@@ -2821,7 +2914,7 @@ if(typeof i18nAdd==='function')i18nAdd({
 // ═══════════════════════════════════════════════════════════════
 //  POSICIONAMENTO EM TC — interface
 // ═══════════════════════════════════════════════════════════════
-const APP_NAME='Posicionamento em TC', APP_VER='1.8';
+const APP_NAME='Posicionamento em TC', APP_VER='1.9';
 const ICO={
  home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.2"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21"/></svg>',
  tri:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.6c0 4.5-3.2 8.2-7.5 9.4-4.3-1.2-7.5-4.9-7.5-9.4V6z"/><path d="M8.6 12.2l2.4 2.4 4.6-4.8"/></svg>',
@@ -3424,6 +3517,138 @@ window.androidBack=function(){try{const lo=document.getElementById('lgOv');if(lo
 
 [['tab-home',ICO.home],['tab-triagem',ICO.tri],['tab-agenda',ICO.ag],['tab-guias',ICO.guide]].forEach(([id,ic])=>{const t=document.querySelector('#'+id+' .tab-icon');if(t)t.innerHTML=ic;});
 loadState();showTab('home');if(typeof i18nInit==='function')i18nInit();
+
+// ═════════ ASSINATURA (Freemium) ═════════
+// Grátis: exames de Cabeça e pescoço e Tórax, triagem, agenda e "Sobre".
+// Premium (Google Play, produto "premium", planos "mensal" e "anual"): todos os exames, guias, cortes reais, simulador, calculadora, quiz e glossário.
+const PLAY_URL='https://play.google.com/store/apps/details?id=com.nerysolution.posicionamentotc';
+const FREE_GRP=new Set(['Cabeça e pescoço','Tórax']);
+const FREE_GUIDE=new Set(['ref']);
+const HAS_PLAY=typeof window.PlayBilling!=='undefined';
+let BILL={ready:false,premium:false,plans:[],error:''};
+try{if(HAS_PLAY)BILL=Object.assign(BILL,JSON.parse(PlayBilling.status()));else if(localStorage.getItem('ctPremDev')==='1')BILL.premium=true;}catch(e){}
+const _LI={en:0,es:1,mx:2,fr:3,hi:4,ja:5,ko:6,nl:7,de:8};
+function TR(pt,a){const L=typeof LANG==='undefined'?'pt':LANG;if(L==='pt'||!a)return pt;let v=a[_LI[L]];if(v==null&&L==='mx')v=a[1];return v==null?pt:v;}
+const isPremium=()=>!!BILL.premium;
+const regionFree=r=>r&&FREE_GRP.has(r.grp);
+const lockedRegion=id=>{const r=REGIONS.find(x=>x.id===id);return !isPremium()&&!regionFree(r);};
+const lockedGuide=id=>!isPremium()&&!FREE_GUIDE.has(id);
+const ICO_LOCK='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+
+window.onBillingUpdate=function(s){
+ const was=isPremium();BILL=Object.assign(BILL,s||{});
+ const pw=document.getElementById('pwOv');if(pw&&pw.classList.contains('open'))renderPaywall();
+ if(was!==isPremium()){if(isPremium()&&pw)closePaywall();const t=navStack[navStack.length-1]||{tab:'home'};_renderTab(t.tab,t.id,t.pi);}
+ else premHdr();
+};
+
+// ── preços (vêm da Play; valores padrão só para exibição antes de carregar)
+function planInfo(id){const p=(BILL.plans||[]).find(x=>x.plan===id);
+ const def={mensal:{price:'R$ 9,90',period:'P1M'},anual:{price:'R$ 79,90',period:'P1Y'}}[id];
+ return p?{price:p.price,period:p.period,trial:p.trial}:{...def,trial:''};}
+const perTxt=p=>({P1M:TR('/mês',['/mo','/mes',null,'/mois','/माह','/月','/월','/mnd','/Monat']),P1Y:TR('/ano',['/yr','/año',null,'/an','/वर्ष','/年','/년','/jr','/Jahr'])})[p]||'';
+const trialTxt=t=>{const m=/^P(\d+)([DWM])$/.exec(t||'');if(!m)return '';const n=+m[1],u={D:n>1?'dias':'dia',W:n>1?'semanas':'semana',M:n>1?'meses':'mês'}[m[2]];return TR(`${n} ${u} grátis`,[`${n}-${m[2]==='D'?'day':m[2]==='W'?'week':'month'} free trial`,`${n} ${u} gratis`,null,`${n} ${m[2]==='D'?'jours':m[2]==='W'?'semaines':'mois'} gratuits`,`${n} ${m[2]==='D'?'दिन':m[2]==='W'?'सप्ताह':'माह'} मुफ़्त`,`${n}${m[2]==='D'?'日間':m[2]==='W'?'週間':'か月'}無料`,`${n}${m[2]==='D'?'일':m[2]==='W'?'주':'개월'} 무료`,`${n} ${m[2]==='D'?'dagen':m[2]==='W'?'weken':'maanden'} gratis`,`${n} ${m[2]==='D'?'Tage':m[2]==='W'?'Wochen':'Monate'} gratis`]);};
+
+// ── tela de assinatura
+function openPaywall(why){
+ let ov=document.getElementById('pwOv');
+ if(!ov){ov=document.createElement('div');ov.id='pwOv';ov.className='pw-ov';ov.onclick=e=>{if(e.target===ov)closePaywall();};document.body.appendChild(ov);}
+ ov.dataset.why=why||'';renderPaywall();ov.classList.add('open');
+ if(HAS_PLAY)try{PlayBilling.refresh();}catch(e){}
+}
+function closePaywall(){const ov=document.getElementById('pwOv');if(ov)ov.classList.remove('open');}
+function renderPaywall(){
+ const ov=document.getElementById('pwOv');if(!ov)return;
+ const nAll=REGIONS.length,nFree=REGIONS.filter(regionFree).length;
+ const nG=GUIDE_MODS.length,nS=GUIDE_MODS.reduce((a,m)=>a+m.slides.length,0),nQ=QZ_BANK.length;
+ const ben=[[TR(`Todos os ${nAll} exames`,[`All ${nAll} exams`,`Los ${nAll} exámenes`,null,`Les ${nAll} examens`,`सभी ${nAll} परीक्षाएँ`,`全${nAll}検査`,`전체 ${nAll}개 검사`,`Alle ${nAll} onderzoeken`,`Alle ${nAll} Untersuchungen`]),
+   TR(`Membros, coluna, abdome, pelve e angiotomografia (grátis: ${nFree} de cabeça e tórax)`,[`Limbs, spine, abdomen, pelvis and CT angiography (free: ${nFree} head and chest)`,`Miembros, columna, abdomen, pelvis y angiotomografía (gratis: ${nFree} de cabeza y tórax)`,null,`Membres, rachis, abdomen, bassin et angioscanner (gratuit : ${nFree} tête et thorax)`,`अंग, रीढ़, पेट, श्रोणि और CT एंजियोग्राफी (मुफ़्त: ${nFree} सिर और छाती)`,`四肢・脊椎・腹部・骨盤・CTA（無料：頭部と胸部の${nFree}件）`,`사지, 척추, 복부, 골반, CT 혈관조영 (무료: 두부·흉부 ${nFree}개)`,`Ledematen, wervelkolom, buik, bekken en CT-angiografie (gratis: ${nFree} hoofd en thorax)`,`Extremitäten, Wirbelsäule, Abdomen, Becken und CT-Angiographie (gratis: ${nFree} Kopf und Thorax)`])],
+  ['Guias do manual',TR(`${nG} módulos com ${nS} telas e anatomia seccional`,[`${nG} modules, ${nS} screens and sectional anatomy`,`${nG} módulos con ${nS} pantallas y anatomía seccional`,null,`${nG} modules, ${nS} écrans et anatomie en coupes`,`${nG} मॉड्यूल, ${nS} स्क्रीन और सेक्शनल एनाटॉमी`,`${nG}モジュール・${nS}画面・断面解剖`,`${nG}개 모듈, ${nS}개 화면, 단면 해부학`,`${nG} modules, ${nS} schermen en doorsnede-anatomie`,`${nG} Module, ${nS} Seiten und Schnittanatomie`])],
+  ['Cortes reais e simulador de janela','Imagens reais de TC, do topograma ao axial, com L/N em UH'],
+  ['Calculadora, quiz e glossário',TR(`${nQ} questões, dose (DLP), pitch e tempo de aquisição`,[`${nQ} questions, dose (DLP), pitch and scan time`,`${nQ} preguntas, dosis (DLP), pitch y tiempo de adquisición`,null,`${nQ} questions, dose (PDL), pitch et durée d’acquisition`,`${nQ} प्रश्न, डोज़ (DLP), पिच और स्कैन समय`,`${nQ}問・線量（DLP）・ピッチ・撮影時間`,`${nQ}문항, 선량(DLP), 피치, 촬영 시간`,`${nQ} vragen, dosis (DLP), pitch en scantijd`,`${nQ} Fragen, Dosis (DLP), Pitch und Scanzeit`])]];
+ const m=planInfo('mensal'),a=planInfo('anual');
+ const mv=parseFloat(String(m.price).replace(/[^\d,.]/g,'').replace('.','').replace(',','.')),av=parseFloat(String(a.price).replace(/[^\d,.]/g,'').replace('.','').replace(',','.'));
+ const save=(mv>0&&av>0)?Math.round((1-av/(mv*12))*100):0;
+ const why=ov.dataset.why;
+ let actions;
+ if(isPremium()){
+  actions=`<div class="pw-ok">${ICO.ok||''} Assinatura ativa — tudo liberado. Obrigado!</div>
+   ${HAS_PLAY?`<button class="pw-link" onclick="PlayBilling.manage()">Gerenciar assinatura no Google Play</button>`:''}`;
+ }else if(HAS_PLAY){
+  actions=`<button class="pw-plan best" onclick="PlayBilling.buy('anual')"><span class="pw-pn">Anual${save>0?` <i>${TR('economize',['save','ahorra',null,'économisez','बचत','お得','절약','bespaar','spare'])} ${save}%</i>`:''}</span><span class="pw-pp"><b>${a.price}</b>${perTxt(a.period)}</span>${a.trial?`<span class="pw-tr">${trialTxt(a.trial)}</span>`:''}</button>
+   <button class="pw-plan" onclick="PlayBilling.buy('mensal')"><span class="pw-pn">Mensal</span><span class="pw-pp"><b>${m.price}</b>${perTxt(m.period)}</span>${m.trial?`<span class="pw-tr">${trialTxt(m.trial)}</span>`:''}</button>
+   ${BILL.error?`<div class="pw-err">${esc(BILL.error)}</div>`:''}
+   <button class="pw-link" onclick="PlayBilling.refresh()">Restaurar assinatura</button>
+   <p class="pw-fine">Pagamento pela sua conta Google Play. A assinatura renova automaticamente até ser cancelada; cancele quando quiser em Google Play › Pagamentos e assinaturas.</p>`;
+ }else{
+  actions=`<a class="pw-plan best" href="${PLAY_URL}" target="_blank" rel="noopener"><span class="pw-pn">Assinar no app Android</span><span class="pw-pp"><b>${a.price}</b>${perTxt('P1Y')} · <b>${m.price}</b>${perTxt('P1M')}</span></a>
+   <p class="pw-fine">A assinatura é feita pelo Google Play, no app Android. Nesta versão web (e no iPhone) estão disponíveis os exames de cabeça e pescoço e de tórax, a triagem e a agenda.</p>`;
+ }
+ ov.innerHTML=`<div class="pw-card" role="dialog" aria-modal="true" aria-label="Assinatura Premium">
+  <button class="pw-x" onclick="closePaywall()" aria-label="Fechar">×</button>
+  <div class="pw-badge">PREMIUM</div>
+  <h2>Posicionamento em TC <b>Premium</b></h2>
+  ${why&&!isPremium()?`<p class="pw-why">${ICO_LOCK} <b>${esc(why)}</b> faz parte do Premium.</p>`:''}
+  <ul class="pw-ben">${ben.map(([t,s])=>`<li><b>${t}</b><span>${s}</span></li>`).join('')}</ul>
+  <div class="pw-act">${actions}</div></div>`;
+}
+
+// ── bloqueios
+const _showDetail0=showDetail,_showPlane0=showPlane,_openGuide0=openGuide;
+showDetail=function(id){if(lockedRegion(id)){const r=REGIONS.find(x=>x.id===id);return openPaywall(r?r.label:'');}_showDetail0(id);};
+showPlane=function(id,pi){if(lockedRegion(id))return showDetail(id);_showPlane0(id,pi);};
+const GUIDE_NAMES={gloss:'Glossário',quiz:'Quiz de TC',calc:'Calculadora de TC',janela:'Simulador de janela',cortes:'Cortes reais de TC'};
+openGuide=function(id){if(lockedGuide(id)){const m=GUIDE_MODS.find(x=>x.id===id);return openPaywall(m?m.title:(GUIDE_NAMES[id]||'Este conteúdo'));}_openGuide0(id);};
+// navegação restaurada / voltar não pode abrir conteúdo bloqueado
+const _renderTabP=_renderTab;
+_renderTab=function(tab,id,pi){
+ if((tab==='detail'||tab==='plane')&&lockedRegion(id)){navStack=[{tab:'home'}];tab='home';}
+ if(tab==='guide'&&lockedGuide(id)){navStack=[{tab:'guias'}];tab='guias';}
+ _renderTabP(tab,id,pi);premDecor(tab);
+};
+function premDecor(tab){
+ premHdr();
+ if(isPremium())return;
+ const sc=document.querySelector('.screen.active');if(!sc)return;
+ if(tab==='home'||tab==='guias'){
+  if(!sc.querySelector('.pw-banner')){const b=document.createElement('button');b.className='pw-banner';b.onclick=()=>openPaywall('');
+   b.innerHTML=`<span class="pw-bstar">★</span><span><b>Desbloqueie tudo com o Premium</b><small>${HAS_PLAY?'Todos os exames, guias, cortes reais, simulador e quiz':'Disponível no app Android (Google Play)'}</small></span><span class="region-chev">${ICO.chev}</span>`;
+   const anchor=tab==='home'?sc.querySelector('.ct-search'):sc.querySelector('.sec-label');if(anchor)anchor.parentNode.insertBefore(b,anchor);else sc.prepend(b);}
+ }
+ if(tab==='guias')sc.querySelectorAll('.gm-card').forEach(c=>{const m=/openGuide\('([^']+)'\)/.exec(c.getAttribute('onclick')||'');if(m&&lockedGuide(m[1])&&!c.querySelector('.pw-lock')){c.classList.add('locked');const s=document.createElement('span');s.className='pw-lock';s.innerHTML=ICO_LOCK;c.appendChild(s);}});
+}
+function lockList(){if(isPremium())return;document.querySelectorAll('#homeList .region-item').forEach(el=>{const m=/showDetail\('([^']+)'\)/.exec(el.getAttribute('onclick')||'');if(m&&lockedRegion(m[1])&&!el.querySelector('.pw-lock')){el.classList.add('locked');const s=document.createElement('span');s.className='pw-lock';s.innerHTML=ICO_LOCK+' PRO';el.querySelector('.region-chev').replaceWith(s);}});}
+const _renderHomeList0=renderHomeList;
+renderHomeList=function(){_renderHomeList0();lockList();};
+// botão ★ no cabeçalho
+const _hdrRight0=hdrRight;
+hdrRight=function(){return `<button class="hdr-btn pw-hdr${isPremium()?' on':''}" onclick="openPaywall('')" aria-label="Premium">★</button>`+_hdrRight0();};
+function premHdr(){document.querySelectorAll('.pw-hdr').forEach(b=>b.classList.toggle('on',isPremium()));}
+// voltar do Android fecha a tela de assinatura
+const _androidBack0=window.androidBack;
+window.androidBack=function(){const ov=document.getElementById('pwOv');if(ov&&ov.classList.contains('open')){closePaywall();return 1;}return _androidBack0();};
+
+if(typeof i18nAdd==='function')i18nAdd({
+ 'Desbloqueie tudo com o Premium':['Unlock everything with Premium','Desbloquea todo con Premium',null,'Débloquez tout avec Premium','Premium के साथ सब कुछ अनलॉक करें','プレミアムですべて解放','프리미엄으로 모두 잠금 해제','Ontgrendel alles met Premium','Alles freischalten mit Premium'],
+ 'Todos os exames, guias, cortes reais, simulador e quiz':['All exams, guides, real slices, simulator and quiz','Todos los exámenes, guías, cortes reales, simulador y quiz',null,'Tous les examens, guides, coupes réelles, simulateur et quiz','सभी परीक्षाएँ, गाइड, वास्तविक स्लाइस, सिम्युलेटर और क्विज़','全検査・ガイド・実画像・シミュレーター・クイズ','모든 검사, 가이드, 실제 단면, 시뮬레이터, 퀴즈','Alle onderzoeken, gidsen, echte coupes, simulator en quiz','Alle Untersuchungen, Leitfäden, echte Schichten, Simulator und Quiz'],
+ 'Disponível no app Android (Google Play)':['Available in the Android app (Google Play)','Disponible en la app de Android (Google Play)',null,"Disponible dans l'app Android (Google Play)",'Android ऐप में उपलब्ध (Google Play)','Androidアプリで利用可能（Google Play）','Android 앱에서 이용 가능 (Google Play)','Beschikbaar in de Android-app (Google Play)','In der Android-App verfügbar (Google Play)'],
+ 'Guias do manual':['Manual guides','Guías del manual',null,'Guides du manuel','मैनुअल गाइड','マニュアルガイド','매뉴얼 가이드','Handleidinggidsen','Handbuch-Leitfäden'],
+ 'Cortes reais e simulador de janela':['Real slices and window simulator','Cortes reales y simulador de ventana',null,'Coupes réelles et simulateur de fenêtre','वास्तविक स्लाइस और विंडो सिम्युलेटर','実画像とウィンドウシミュレーター','실제 단면과 윈도우 시뮬레이터','Echte coupes en venstersimulator','Echte Schichten und Fenstersimulator'],
+ 'Imagens reais de TC, do topograma ao axial, com L/N em UH':['Real CT images, from scout to axial, with W/L in HU','Imágenes reales de TC, del topograma al axial, con N/A en UH',null,'Images TDM réelles, du topogramme à l’axial, avec N/L en UH','वास्तविक CT चित्र, स्काउट से एक्सियल तक, HU में W/L','実際のCT画像（位置決めから横断像まで、HUでWL/WW）','실제 CT 영상, 스카우트에서 축상까지, HU 기준 W/L','Echte CT-beelden, van scout tot axiaal, met W/L in HE','Echte CT-Bilder, vom Topogramm bis axial, mit W/L in HE'],
+ 'Calculadora, quiz e glossário':['Calculator, quiz and glossary','Calculadora, quiz y glosario',null,'Calculatrice, quiz et glossaire','कैलकुलेटर, क्विज़ और शब्दावली','計算機・クイズ・用語集','계산기, 퀴즈, 용어집','Rekenmachine, quiz en woordenlijst','Rechner, Quiz und Glossar'],
+ 'Anual':['Annual','Anual',null,'Annuel','वार्षिक','年額','연간','Jaarlijks','Jährlich'],
+ 'Mensal':['Monthly','Mensual',null,'Mensuel','मासिक','月額','월간','Maandelijks','Monatlich'],
+ 'Restaurar assinatura':['Restore subscription','Restaurar suscripción',null,"Restaurer l'abonnement",'सदस्यता पुनर्स्थापित करें','購読を復元','구독 복원','Abonnement herstellen','Abo wiederherstellen'],
+ 'Gerenciar assinatura no Google Play':['Manage subscription on Google Play','Administrar suscripción en Google Play',null,"Gérer l'abonnement sur Google Play",'Google Play पर सदस्यता प्रबंधित करें','Google Playで購読を管理','Google Play에서 구독 관리','Abonnement beheren in Google Play','Abo in Google Play verwalten'],
+ 'Assinar no app Android':['Subscribe in the Android app','Suscribirse en la app de Android',null,"S'abonner dans l'app Android",'Android ऐप में सदस्यता लें','Androidアプリで購読','Android 앱에서 구독','Abonneren in de Android-app','In der Android-App abonnieren'],
+ 'Pagamento pela sua conta Google Play. A assinatura renova automaticamente até ser cancelada; cancele quando quiser em Google Play › Pagamentos e assinaturas.':['Charged to your Google Play account. The subscription renews automatically until cancelled; cancel anytime in Google Play › Payments & subscriptions.','Pago con tu cuenta de Google Play. La suscripción se renueva automáticamente hasta que la canceles; cancela cuando quieras en Google Play › Pagos y suscripciones.',null,"Paiement via votre compte Google Play. L'abonnement se renouvelle automatiquement jusqu'à résiliation ; résiliez à tout moment dans Google Play › Paiements et abonnements.",'आपके Google Play खाते से भुगतान। रद्द करने तक सदस्यता स्वतः नवीनीकृत होती है; Google Play › भुगतान और सदस्यताएँ में कभी भी रद्द करें।','Google Playアカウントで支払い。解約するまで自動更新されます。Google Play › お支払いと定期購入でいつでも解約できます。','Google Play 계정으로 결제됩니다. 취소할 때까지 자동 갱신되며 Google Play › 결제 및 구독에서 언제든지 취소할 수 있습니다.','Betaling via je Google Play-account. Het abonnement wordt automatisch verlengd tot je opzegt; zeg op wanneer je wilt via Google Play › Betalingen en abonnementen.','Zahlung über dein Google-Play-Konto. Das Abo verlängert sich automatisch bis zur Kündigung; jederzeit kündbar unter Google Play › Zahlungen & Abos.'],
+ 'A assinatura é feita pelo Google Play, no app Android. Nesta versão web (e no iPhone) estão disponíveis os exames de cabeça e pescoço e de tórax, a triagem e a agenda.':['Subscriptions are handled by Google Play in the Android app. This web version (and iPhone) includes head & neck and chest exams, screening and schedule.','La suscripción se hace por Google Play en la app de Android. En esta versión web (y en iPhone) están disponibles los exámenes de cabeza y cuello y de tórax, el triaje y la agenda.',null,"L'abonnement se fait via Google Play dans l'app Android. Cette version web (et iPhone) comprend les examens tête et cou et thorax, le tri et l'agenda.",'सदस्यता Android ऐप में Google Play द्वारा होती है। इस वेब संस्करण (और iPhone) में सिर-गर्दन और छाती की परीक्षाएँ, ट्राइएज और एजेंडा उपलब्ध हैं।','購読はAndroidアプリのGoogle Playで行います。このWeb版（iPhone）では頭頸部・胸部の検査、問診、予定表が使えます。','구독은 Android 앱의 Google Play에서 진행됩니다. 이 웹 버전(및 iPhone)에서는 두경부·흉부 검사, 사전 문진, 일정을 이용할 수 있습니다.','Abonneren gaat via Google Play in de Android-app. Deze webversie (en iPhone) bevat hoofd-hals- en thoraxonderzoeken, triage en agenda.','Das Abo läuft über Google Play in der Android-App. Diese Web-Version (und iPhone) enthält Kopf-Hals- und Thorax-Untersuchungen, Triage und Terminplan.'],
+ 'Assinatura ativa — tudo liberado. Obrigado!':['Subscription active — everything unlocked. Thank you!','Suscripción activa: todo desbloqueado. ¡Gracias!',null,'Abonnement actif — tout est débloqué. Merci !','सदस्यता सक्रिय — सब कुछ अनलॉक। धन्यवाद!','購読中 — すべて利用可能です。ありがとうございます！','구독 활성 — 모두 잠금 해제되었습니다. 감사합니다!','Abonnement actief — alles ontgrendeld. Bedankt!','Abo aktiv — alles freigeschaltet. Danke!'],
+ 'faz parte do Premium.':['is part of Premium.','forma parte de Premium.',null,'fait partie du Premium.','Premium का हिस्सा है।','はプレミアム機能です。','은(는) 프리미엄 기능입니다.','hoort bij Premium.','gehört zu Premium.']
+});
+
+// recarrega a tela inicial já com os bloqueios
+showTab('home');
 
 </script>
 <script>if('serviceWorker' in navigator&&isSecureContext){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}</script></body>
