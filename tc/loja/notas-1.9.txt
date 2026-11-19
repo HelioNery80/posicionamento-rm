@@ -1,0 +1,84 @@
+<pt-BR>
+• Assinatura Premium (R$ 9,90/mês ou R$ 79,90/ano no Google Play): libera 41 exames, guias do manual, cortes reais de TC, simulador de janela, calculadora, quiz e glossário
+• Grátis: cabeça/pescoço, tórax, triagem e agenda
+• Novos exames: esterno, enterotomografia, angio de MMII, cintura escapular, escápula, coxa, perna, torção de MMII, braço, antebraço, face e Dentascan + panorâmica
+• Topogramas AP/lateral
+• Quadril: ângulo alfa; joelho: TA-GT
+• Decúbito por exame
+• 10 idiomas com bandeiras
+</pt-BR>
+<en-US>
+• New Premium subscription via Google Play: unlocks all 41 exams, manual guides, real CT slices, window simulator, calculator, quiz and glossary
+• Free: head & neck, chest, triage and schedule
+• New exams: sternum, CT enterography, lower limb CTA, shoulder girdle, scapula, thigh, leg, lower limb torsion, arm, forearm, face and Dentascan with panoramic
+• AP and lateral scouts
+• Hip alpha angle; knee TT-TG
+• Patient position box in every exam
+• 10 languages with flags
+</en-US>
+<es-ES>
+• Suscripción Premium: desbloquea los 41 exámenes, guías del manual, cortes reales de TC, simulador de ventana, calculadora, quiz y glosario
+• Gratis: cabeza y cuello, tórax, triaje y agenda
+• Nuevos exámenes: esternón, enterotomografía, angio-TC de MMII, cintura escapular, escápula, muslo, pierna, torsión de MMII, brazo, antebrazo, cara y Dentascan con panorámica
+• Topogramas AP y lateral; cadera con ángulo alfa; rodilla TA-GT
+• Decúbito en cada examen; 10 idiomas con banderas
+</es-ES>
+<es-419>
+• Suscripción Premium: desbloquea los 41 estudios, guías del manual, cortes reales de TC, simulador de ventana, calculadora, quiz y glosario
+• Gratis: cabeza y cuello, tórax, triaje y agenda
+• Nuevos estudios: esternón, enterotomografía, angio-TC de MMII, cintura escapular, escápula, muslo, pierna, torsión de MMII, brazo, antebrazo, cara y Dentascan con panorámica
+• Topogramas AP y lateral; cadera con ángulo alfa; rodilla TA-GT
+• Decúbito en cada estudio; 10 idiomas con banderas
+</es-419>
+<fr-FR>
+• Abonnement Premium : débloque les 41 examens, guides du manuel, coupes TDM réelles, simulateur de fenêtre, calculatrice, quiz et glossaire
+• Gratuit : tête et cou, thorax, triage et agenda
+• Nouveaux examens : sternum, entéroscanner, angioscanner des MI, ceinture scapulaire, omoplate, cuisse, jambe, torsion des MI, bras, avant-bras, face et Dentascan avec panoramique
+• Topogrammes face/profil, angle alpha de hanche, TA-GT du genou
+• Décubitus par examen, 10 langues avec drapeaux
+</fr-FR>
+<hi-IN>
+• नई प्रीमियम सदस्यता (Google Play के ज़रिए): सभी 41 जाँचें, मैनुअल गाइड, असली CT स्लाइस, विंडो सिम्युलेटर, कैलकुलेटर, क्विज़ और शब्दावली अनलॉक
+• मुफ़्त: सिर और गर्दन, छाती, ट्राइएज और शेड्यूल
+• नई जाँचें: स्टर्नम, CT एंटरोग्राफी, पैरों की एंजियो, शोल्डर गर्डल, स्कैपुला, जांघ, टांग, पैरों का टॉर्शन, बांह, अग्रबाहु, चेहरा और पैनोरमिक सहित Dentascan
+• AP और लेटरल टोपोग्राम
+• कूल्हे का अल्फा कोण; घुटने का TT-TG
+• हर जाँच में रोगी की स्थिति
+• झंडों के साथ 10 भाषाएँ
+</hi-IN>
+<ja-JP>
+バージョン1.9の新機能:
+• 新しいプレミアム定期購入(Google Play経由):全41検査、マニュアルガイド、実際のCT画像、ウィンドウシミュレーター、計算機、クイズ、用語集を解放
+• 無料:頭頸部、胸部、トリアージ、予約
+• 新しい検査:胸骨、CTエンテログラフィー、下肢CTA、肩甲帯、肩甲骨、大腿、下腿、下肢捻転、上腕、前腕、顔面、パノラマ付きDentascan
+• 正面・側面の位置決め画像
+• 股関節アルファ角、膝TT-TG
+• 各検査に体位ボックス
+• 国旗付き10言語
+</ja-JP>
+<ko-KR>
+버전 1.9 새로운 기능:
+• 새 프리미엄 구독(Google Play): 41개 전체 검사, 매뉴얼 가이드, 실제 CT 단면, 윈도우 시뮬레이터, 계산기, 퀴즈, 용어집 잠금 해제
+• 무료: 두경부, 흉부, 분류(트리아지), 일정
+• 새 검사: 흉골, CT 장조영술, 하지 CTA, 견갑대, 견갑골, 대퇴, 하퇴, 하지 염전, 상완, 전완, 안면, 파노라마 포함 Dentascan
+• AP 및 측면 스카우트
+• 고관절 알파각, 무릎 TT-TG
+• 각 검사에 체위 상자
+• 국기와 함께 10개 언어
+</ko-KR>
+<nl-NL>
+• Nieuw Premium-abonnement via Google Play: ontgrendelt alle 41 onderzoeken, handleidingen, echte CT-coupes, venstersimulator, calculator, quiz en woordenlijst
+• Gratis: hoofd-hals, thorax, triage en agenda
+• Nieuwe onderzoeken: sternum, CT-enterografie, CTA benen, schoudergordel, scapula, dij, onderbeen, beentorsie, bovenarm, onderarm, gezicht en Dentascan met panorama
+• AP- en laterale scanogrammen
+• Heup: alfahoek; knie: TT-TG
+• Liggingsvak bij elk onderzoek
+• 10 talen met vlaggen
+</nl-NL>
+<de-DE>
+• Premium-Abo: schaltet alle 41 Untersuchungen, Handbuch-Leitfäden, echte CT-Schichten, Fenstersimulator, Rechner, Quiz und Glossar frei
+• Gratis: Kopf-Hals, Thorax, Triage und Termine
+• Neue Untersuchungen: Sternum, CT-Enterographie, CTA der Beine, Schultergürtel, Skapula, Oberschenkel, Unterschenkel, Beintorsion, Oberarm, Unterarm, Gesicht und Dentascan mit Panorama
+• AP-/seitliches Topogramm, Hüft-Alpha-Winkel, Knie TT-TG
+• Lagerung je Untersuchung, 10 Sprachen mit Flaggen
+</de-DE>
