@@ -3381,7 +3381,7 @@ function renderGuide(id){
  if(id==='calc')return renderCalc();
  if(id==='janela')return renderJanela();
  if(id==='cortes')return renderCortes();
- if(id==='ref'){el.innerHTML=`<div class="calc"><div class="params-box"><div class="params-title">Privacidade</div><p class="pd-desc">Este app funciona offline e não coleta, envia nem compartilha dados pessoais. A triagem, a agenda e as preferências ficam só neste aparelho. Política de privacidade completa: <a href="https://docs.google.com/document/d/1ct_kz-OHVz3Nn1B13ZWFhpNVPulv-HCSwMWj7Cg51nY/view" target="_blank" rel="noopener">docs.google.com/…/Política de Privacidade</a>.</p></div>
+ if(id==='ref'){el.innerHTML=`<div class="calc"><div class="params-box"><div class="params-title">Privacidade</div><p class="pd-desc">Este app funciona offline e não coleta, envia nem compartilha dados pessoais. A triagem, a agenda e as preferências ficam só neste aparelho. Política de privacidade completa: <a href="https://helionery80.github.io/posicionamento-rm/tc/privacidade.html" target="_blank" rel="noopener">docs.google.com/…/Política de Privacidade</a>.</p></div>
   <div class="params-box"><div class="params-title">Fonte</div><p class="pd-desc">As referências "📖 M x-y" indicam a página do <b>${MANUAL}</b> (jun/2025), em português. Os textos são resumos com palavras próprias; consulte o manual original para o procedimento completo.</p></div>
   <div class="params-box"><div class="params-title">Protocolos CBR 2015</div><p class="pd-desc">Os cartões "Protocolos CBR 2015" de cada exame e o guia de contraste resumem o documento "Protocolos de Tomografia Computadorizada" da Comissão de Tomografia do Colégio Brasileiro de Radiologia (versão de 17/08/2015), feito para tomógrafos de 16 canais.</p></div>
   <div class="params-box"><div class="params-title">Guias de física, imagem, artefatos e anatomia</div><p class="pd-desc">Textos e ilustrações próprios, com base de estudo no ${EBOOK}, distribuído pelo CBR sob licença CC BY-NC-ND 4.0. Nenhuma figura do e-Book foi reproduzida ou adaptada; consulte o material original para as imagens reais.</p></div>
@@ -3543,7 +3543,7 @@ window.onBillingUpdate=function(s){
 };
 
 // ── preços (vêm da Play; valores padrão só para exibição antes de carregar)
-function planInfo(id){const p=(BILL.plans||[]).find(x=>x.plan===id);
+function planInfo(id){const P=BILL.plans||[],p=P.find(x=>x.plan===id&&x.offer)||P.find(x=>x.plan===id);
  const def={mensal:{price:'R$ 9,90',period:'P1M'},anual:{price:'R$ 79,90',period:'P1Y'}}[id];
  return p?{price:p.price,period:p.period,trial:p.trial}:{...def,trial:''};}
 const perTxt=p=>({P1M:TR('/mês',['/mo','/mes',null,'/mois','/माह','/月','/월','/mnd','/Monat']),P1Y:TR('/ano',['/yr','/año',null,'/an','/वर्ष','/年','/년','/jr','/Jahr'])})[p]||'';
