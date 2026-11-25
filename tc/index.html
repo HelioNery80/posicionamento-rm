@@ -2913,6 +2913,56 @@ if(typeof i18nAdd==='function')i18nAdd({
 'gantry':['gantry','gantry',null,'statif','गैन्ट्री','ガントリー','갠트리','gantry','Gantry']
 });
 
+// ── Mão e Escanometria tomográfica (25/11/2026) ──
+(function(){
+const SUP='Membro superior',INF='Membro inferior',OSSO=[['Osso',2000,500],['Partes moles',400,50]];
+const after=(id,obj)=>{const i=REGIONS.findIndex(r=>r.id===id);REGIONS.splice(i<0?REGIONS.length:i+1,0,obj);};
+const MPRm=(pl,esp,obs)=>P('MPR '+pl,'—','—','—','—','—',esp,'—','Bone',obs||'');
+const HV={view:'hand',crop:[0,0,240,400]},HL={view:'handlat',crop:[0,0,240,400]};
+after('escafoide',{id:'mao',label:'Mão',icon:'🖐️',grp:SUP,orient:'Cabeça primeiro · decúbito ventral, braço acima da cabeça',
+ posicionamento:'Decúbito ventral, braço estendido acima da cabeça (ou sentado com a mão sobre a mesa, se não tolerar). Mão pronada e plana sobre esponja, dedos estendidos e levemente afastados, fixada com fita. Retire anéis e curativos com metal.',
+ centralizacao:'Laser sagital no 3º metacarpo, axial no meio dos metacarpos; marcador zero nas cabeças dos metacarpos.',
+ refs:['M 9-65'],contraste:'Sem contraste (com contraste se infecção ou tumor de partes moles).',janelas:OSSO,
+ planos:[
+  {nome:'Topograma AP + lateral',cor:'#00e5ff',v:Object.assign({},HV,{s:20,e:380,scout:true}),vl:Object.assign({},HL,{s:20,e:380,scout:true}),desc:'PA e perfil do rádio distal às pontas dos dedos.',params:[SCOUT('AP 0°','mA mínimo — extremidade'),SCOUT('LAT 90°','mA mínimo')]},
+  {nome:'Helicoidal — rádio distal às falanges',cor:'#00e5ff',v:Object.assign({},HV,{s:300,e:22,x:[20,220]}),vl:Object.assign({},HL,{s:300,e:22,x:[70,180]}),
+   desc:'Da metáfise distal do rádio até as pontas dos dedos, volume fino. Para lesão de um só dedo, limite a faixa ao raio afetado com o metacarpo inteiro.',
+   params:[P('Mão helicoidal','120','50–100','1,0','0,562:1','16×1,25 (20 mm)','1,25 / 0,625 mm','10–14 cm','Bone (ou Detail)','SFOV Small')]},
+  {nome:'Coronal — paralelo à palma',cor:'#00e5ff',v:Object.assign({},HV,{s:300,e:22,x:[20,220],mpr:true}),vl:Object.assign({},HL,{s:300,e:22,x:[70,180],mpr:true}),
+   desc:'Paralelo ao plano dos metacarpos (palma), cobrindo da face dorsal à palmar.',params:[MPRm('COR','1 mm','∥ plano dos metacarpos')]},
+  {nome:'Sagital — ao longo de cada raio',cor:'#00e5ff',v:Object.assign({},HV,{s:300,e:22,x:[20,220],mpr:true,label:'SAG ∥ raio'}),vl:Object.assign({},HL,{s:300,e:22,x:[70,180],mpr:true}),
+   desc:'Sagital ao longo do eixo de cada metacarpo e dedo de interesse (MPR oblíquo por raio).',params:[MPRm('SAG OBL','1 mm','∥ eixo do metacarpo / dedo')]},
+  {nome:'Axial — perpendicular aos metacarpos',cor:'#00e5ff',v:Object.assign({},HV,{s:265,e:150,x:[20,220],mpr:true,label:'AX ⟂ metacarpos'}),vl:Object.assign({},HL,{s:265,e:150,x:[70,180],mpr:true}),
+   desc:'Axial perpendicular aos metacarpos, do carpo às cabeças metacarpais. Bom para fraturas de base de metacarpo e articulações carpometacarpais.',params:[MPRm('AX','1–2 mm','⟂ diáfises metacarpais')]}
+ ]});
+const L0={view:'ap',crop:[0,440,240,1012]},LL={view:'latleg',crop:[0,440,240,1012]};
+after('torcao',{id:'escanometria',label:'Escanometria Tomográfica',icon:'📏',grp:INF,orient:'Pés primeiro · decúbito dorsal (FFS)',
+ posicionamento:'Supino, pernas estendidas e paralelas, patelas voltadas para cima, pés em posição neutra (presos juntos com fita). Pelve nivelada, sem rotação. Retire objetos metálicos dos bolsos e da roupa.',
+ centralizacao:'Laser sagital entre as pernas; coronal no meio das coxas; marcador zero na crista ilíaca. O topograma tem de ir da crista ilíaca às plantas, em uma só passada.',
+ refs:['M 9-65','M 4-4'],contraste:'Sem contraste. Baixíssima dose (só topogramas, em geral).',janelas:OSSO,
+ planos:[
+  {nome:'Topograma AP (escanograma)',cor:'#ffbe3c',v:Object.assign({},L0,{s:450,e:1006,scout:true}),vl:Object.assign({},LL,{s:540,e:1006,scout:true}),
+   desc:'AP bilateral da crista ilíaca às plantas, em uma passada. É a imagem onde se medem os comprimentos. Faça o lateral só se houver flexo de joelho (a flexão encurta o membro no AP).',
+   params:[SCOUT('AP 0°','Escanograma · mA baixo · comprimento total da mesa'),SCOUT('LAT 90°','Opcional — flexo de joelho')]},
+  {nome:'Fêmur — cabeça femoral ao intercôndilo',cor:'#ffbe3c',v:Object.assign({},L0,{s:520,e:728,x:[22,218],label:'FÊMUR'}),vl:Object.assign({},LL,{s:540,e:728,x:[60,205]}),
+   desc:'Do topo da cabeça femoral ao ponto mais baixo do intercôndilo (ou à tangente dos côndilos), em cada lado.',params:[P('Medida','—','—','—','—','—','—','—','—','Fêmur D e E · régua no escanograma')]},
+  {nome:'Tíbia — platô ao plafond',cor:'#ffbe3c',v:Object.assign({},L0,{s:730,e:948,x:[22,218],label:'TÍBIA'}),vl:Object.assign({},LL,{s:730,e:948,x:[60,205]}),
+   desc:'Do centro das espinhas tibiais (platô) ao centro do plafond tibial, em cada lado.',params:[P('Medida','—','—','—','—','—','—','—','—','Tíbia D e E')]},
+  {nome:'Membro total e eixo mecânico',cor:'#ffbe3c',v:Object.assign({},L0,{s:520,e:948,x:[22,218],label:'TOTAL'}),vl:Object.assign({},LL,{s:540,e:948,x:[60,205]}),
+   desc:'Comprimento total = fêmur + tíbia (ou cabeça femoral ao plafond). Eixo mecânico: do centro da cabeça femoral ao centro do tornozelo, passando perto do centro do joelho. Compare D × E e informe a diferença.',
+   params:[P('Medida','—','—','—','—','—','—','—','—','Diferença D–E em mm')]},
+  {nome:'Axiais de confirmação (opcional)',cor:'#ffbe3c',v:Object.assign({},L0,{s:515,e:540,x:[22,218],axial:true,label:'AX quadris'}),vl:Object.assign({},LL,{s:540,e:560,x:[60,205],axial:true}),
+   desc:'Se o serviço usa: poucos cortes axiais de baixa dose nas cabeças femorais, nos joelhos e nos tornozelos (mesma técnica da Torção dos MMII), para marcar os pontos com precisão. Não mova o paciente entre as séries.',
+   params:[P('Quadris / joelhos / tornozelos','120','30–50 (baixa dose)','1,0','—','8×1,25 (10 mm)','2,5 / 2,5 mm','40 cm','Bone','3 blocos curtos')]}
+ ]});
+if(typeof i18nAdd==='function')i18nAdd({
+ 'Mão':['Hand','Mano',null,'Main','हाथ','手','손','Hand','Hand'],
+ 'Escanometria Tomográfica':['CT Scanography (leg length)','Escanometría por TC',null,'Scanométrie TDM','CT स्कैनोमेट्री','CTスキャノメトリー','CT 하지 길이 측정','CT-scanometrie','CT-Scanometrie'],
+ 'Topograma AP (escanograma)':['AP scout (scanogram)','Topograma AP (escanograma)',null,'Topogramme AP (scanogramme)','AP स्काउट (स्कैनोग्राम)','AP位置決め（スキャノグラム）','AP 스카우트(스캐노그램)','AP-scout (scanogram)','AP-Topogramm (Scanogramm)'],
+ 'Membro total e eixo mecânico':['Total limb length and mechanical axis','Miembro total y eje mecánico',null,'Membre total et axe mécanique','कुल अंग और यांत्रिक अक्ष','下肢全長と機能軸','하지 전장과 기계축','Totale beenlengte en mechanische as','Gesamtlänge und mechanische Achse']
+});
+})();
+
 // Topogramas reais de membros: troca os desenhos de membros pelos topogramas enviados (25/11/2026)
 // ── Topogramas reais de membros (25/11/2026): troca os desenhos mantendo o planejamento ──
 // Cada desenho é levado à imagem real por marcos anatômicos (quadril, joelho, tornozelo, planta;
@@ -2967,6 +3017,18 @@ if(typeof i18nAdd==='function')i18nAdd({
   use(ex,sd,'foot','fsag',[[72,300],[182,585]],[40,300],[95,545],{keepTilt:true,crop:[40,60,600,626]});
   use(ex,sd,'footax','fax',[[10,90],[295,554]],[70,175],[190,470],{keepTilt:true,crop:[120,40,560,554]});
  }));
+ // mão, RUD, ombro e artro de ombro
+ use('mao','v','hand','hap',[[20,40],[205,590],[265,690]],[60,180],[140,430],{crop:[0,0,600,1038]});
+ use('mao','vl','handlat','hlat',[[20,60],[205,790],[265,900]],[80,170],[110,420],{crop:[0,0,600,1372]});
+ use('rud','v','hand','hap',[[20,40],[205,590],[265,690]],[60,180],[140,430],{crop:[0,330,600,1038]});
+ use('rud','vl','handlat','hlat',[[20,60],[205,790],[265,900]],[80,170],[110,420],{crop:[0,560,600,1250]});
+ use('ombro','v','ap','armap',[[165,130],[345,860],[470,1530]],[0,40],[120,340],{keepTilt:true,crop:[0,0,600,700]});
+ use('artro_aber','v','ap','armap',[[165,130],[345,860],[470,1530]],[0,40],[120,340],{keepTilt:true,crop:[0,0,600,820]});
+ // angio de MMII e escanometria: topograma total dos membros inferiores (pelve aos pés)
+ ['angio_mmii','escanometria'].forEach(ex=>{
+  use(ex,'v','ap','wap',[[530,60],[728,610],[948,1110],[1006,1240]],LAP,[30,470],{crop:[0,0,498,1300]});
+  use(ex,'vl','latleg','wlat2',[[530,60],[728,615],[948,1110],[1006,1230]],LLAT,[120,470],{crop:[0,0,535,1300]});
+ });
  // torção: quadril, joelho e tornozelo no mesmo topograma (pelve aos pés)
  use('torcao','v','ap','wap',[[530,60],[728,610],[948,1110],[1006,1240]],LAP,[30,470],{crop:[0,0,498,1300]});
  use('torcao','vl','latleg','wlat2',[[530,60],[728,615],[948,1110],[1006,1230]],LLAT,[120,470],{crop:[0,0,535,1300]});
@@ -2976,18 +3038,18 @@ if(typeof i18nAdd==='function')i18nAdd({
  use('cotovelo','v','ap','farap',[[345,295],[470,1235]],[0,40],[150,420],{crop:[0,0,600,800]});
  // punho e escafoide
  ['punho','escafoide'].forEach(ex=>{
-  use(ex,'v','hand','hap',[[205,590],[265,690]],[60,180],[140,430],ex==='escafoide'?{only:[0]}:{crop:[0,330,600,1038]});
-  use(ex,'vl','handlat','hlat',[[205,790],[265,900]],[80,170],[110,420],ex==='escafoide'?{only:[0]}:{crop:[0,560,600,1250]});
+  use(ex,'v','hand','hap',[[20,40],[205,590],[265,690]],[60,180],[140,430],ex==='escafoide'?{only:[0]}:{crop:[0,330,600,1038]});
+  use(ex,'vl','handlat','hlat',[[20,60],[205,790],[265,900]],[80,170],[110,420],ex==='escafoide'?{only:[0]}:{crop:[0,560,600,1250]});
  });
- use('escafoide','v','hand','hap',[[205,590],[265,690]],[60,180],[140,430],{only:[1],crop:[100,520,480,760]});
- use('escafoide','vl','handlat','hlat',[[205,790],[265,900]],[80,170],[110,420],{only:[1],crop:[60,700,460,980]});
+ use('escafoide','v','hand','hap',[[20,40],[205,590],[265,690]],[60,180],[140,430],{only:[1],crop:[100,520,480,760]});
+ use('escafoide','vl','handlat','hlat',[[20,60],[205,790],[265,900]],[80,170],[110,420],{only:[1],crop:[60,700,460,980]});
  if(typeof i18nAdd==='function')i18nAdd({});
 })();
 
 // ═══════════════════════════════════════════════════════════════
 //  POSICIONAMENTO EM TC — interface
 // ═══════════════════════════════════════════════════════════════
-const APP_NAME='Posicionamento em TC', APP_VER='1.11';
+const APP_NAME='Posicionamento em TC', APP_VER='1.12';
 const ICO={
  home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.2"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21"/></svg>',
  tri:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.6c0 4.5-3.2 8.2-7.5 9.4-4.3-1.2-7.5-4.9-7.5-9.4V6z"/><path d="M8.6 12.2l2.4 2.4 4.6-4.8"/></svg>',
