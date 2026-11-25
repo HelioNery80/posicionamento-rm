@@ -1,0 +1,70 @@
+<pt-BR>
+• Topogramas reais em todos os exames de membros: quadril, coxa, joelho, perna, tornozelo, pé, torção, ombro, braço, antebraço, cotovelo, punho e mão
+• Novo exame: Mão, com 5 planos
+• Novo exame: Escanometria tomográfica (fêmur, tíbia, membro total e eixo mecânico)
+• Pé com topograma bilateral e reformatações sobre imagens reais
+• Angio-TC de membros inferiores com topograma total
+</pt-BR>
+<en-US>
+• Real scouts in all limb exams: hip, thigh, knee, leg, ankle, foot, torsion, shoulder, arm, forearm, elbow, wrist and hand
+• New exam: Hand, with 5 planes
+• New exam: CT scanography (femur, tibia, total limb and mechanical axis)
+• Foot with bilateral scout and reformats on real images
+• Lower-limb CT angiography with full-length scout
+</en-US>
+<es-ES>
+• Topogramas reales en todos los exámenes de miembros: cadera, muslo, rodilla, pierna, tobillo, pie, torsión, hombro, brazo, antebrazo, codo, muñeca y mano
+• Nuevo examen: Mano, con 5 planos
+• Nuevo examen: Escanometría por TC (fémur, tibia, miembro total y eje mecánico)
+• Pie con topograma bilateral y reformateos sobre imágenes reales
+• Angio-TC de miembros inferiores con topograma completo
+</es-ES>
+<es-419>
+• Topogramas reales en todos los exámenes de miembros: cadera, muslo, rodilla, pierna, tobillo, pie, torsión, hombro, brazo, antebrazo, codo, muñeca y mano
+• Nuevo examen: Mano, con 5 planos
+• Nuevo examen: Escanometría por TC (fémur, tibia, miembro total y eje mecánico)
+• Pie con topograma bilateral y reformateos sobre imágenes reales
+• Angio-TC de miembros inferiores con topograma completo
+</es-419>
+<fr-FR>
+• Topogrammes réels pour tous les examens des membres : hanche, cuisse, genou, jambe, cheville, pied, torsion, épaule, bras, avant-bras, coude, poignet et main
+• Nouvel examen : Main, 5 plans
+• Nouvel examen : Scanométrie TDM (fémur, tibia, membre total, axe mécanique)
+• Pied avec topogramme bilatéral et reconstructions sur images réelles
+• Angioscanner des membres inférieurs avec topogramme complet
+</fr-FR>
+<hi-IN>
+• सभी अंग परीक्षाओं में वास्तविक स्काउट: कूल्हा, जांघ, घुटना, पैर, टखना, पंजा, टॉर्शन, कंधा, बांह, अग्रबाहु, कोहनी, कलाई और हाथ
+• नई परीक्षा: हाथ, 5 प्लेन
+• नई परीक्षा: CT स्कैनोमेट्री (फीमर, टिबिया, कुल अंग और यांत्रिक अक्ष)
+• द्विपक्षीय स्काउट के साथ पंजा
+• निचले अंगों की CT एंजियोग्राफी पूर्ण स्काउट के साथ
+</hi-IN>
+<ja-JP>
+• 四肢の全検査に実際の位置決め画像：股関節、大腿、膝、下腿、足関節、足、捻れ、肩、上腕、前腕、肘、手関節、手
+• 新検査：手（5断面）
+• 新検査：CTスキャノメトリー（大腿骨・脛骨・下肢全長・機能軸）
+• 足は両側位置決めと実画像上の再構成
+• 下肢CTAは全長の位置決め画像
+</ja-JP>
+<ko-KR>
+• 모든 사지 검사에 실제 스카우트: 고관절, 대퇴, 무릎, 하퇴, 발목, 발, 염전, 어깨, 상완, 전완, 팔꿈치, 손목, 손
+• 새 검사: 손(5개 단면)
+• 새 검사: CT 하지 길이 측정(대퇴골, 경골, 하지 전장, 기계축)
+• 발: 양측 스카우트와 실제 영상 위 재구성
+• 하지 CT 혈관조영: 전장 스카우트
+</ko-KR>
+<nl-NL>
+• Echte scouts bij alle ledematenonderzoeken: heup, dijbeen, knie, onderbeen, enkel, voet, torsie, schouder, arm, onderarm, elleboog, pols en hand
+• Nieuw onderzoek: Hand, met 5 vlakken
+• Nieuw onderzoek: CT-scanometrie (femur, tibia, totale beenlengte, mechanische as)
+• Voet met bilaterale scout en reconstructies op echte beelden
+• CT-angiografie benen met volledige scout
+</nl-NL>
+<de-DE>
+• Echte Topogramme bei allen Extremitäten: Hüfte, Oberschenkel, Knie, Unterschenkel, Sprunggelenk, Fuß, Torsion, Schulter, Oberarm, Unterarm, Ellenbogen, Handgelenk und Hand
+• Neue Untersuchung: Hand, 5 Ebenen
+• Neue Untersuchung: CT-Scanometrie (Femur, Tibia, Gesamtlänge, mechanische Achse)
+• Fuß mit beidseitigem Topogramm und Rekonstruktionen auf echten Bildern
+• CT-Angiographie der Beine mit Ganzbein-Topogramm
+</de-DE>
