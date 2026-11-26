@@ -3244,7 +3244,7 @@ window.AT=AT;
 const exName=ex=>{const r=typeof REGIONS!=='undefined'&&REGIONS.find(x=>x.id===ex);return r?(r.nome||r.label):ex;};
 const near=(k,y)=>{const L=ATLAS[k].imgs;let b=0;L.forEach((m,j)=>{if(Math.abs(m.y-y)<Math.abs(L[b].y-y))b=j;});return b;};
 const MONO="font-family=\"Share Tech Mono,monospace\"";
-function atBar(){return `<div class="btn3d-bar" style="margin:0 0 8px;flex-wrap:wrap"><button class="${AT.k===null?'sel':''}" onclick="atSel(null)">Tórax · Abdome</button>${Object.keys(ATLAS).map(k=>`<button class="${AT.k===k?'sel':''}" onclick="atSel('${k}')">${ATLAS[k].nome}</button>`).join('')}</div>`;}
+function atBar(){const ks=Object.keys(ATLAS);const H=['cranio','face','pescoco','ombro','punho'],T=['lombar','joelho','pe','corpo'];const seq=[...H.filter(k=>ks.includes(k)),'__TRUNK__',...T.filter(k=>ks.includes(k)),...ks.filter(k=>!H.includes(k)&&!T.includes(k))];const btn=k=>k==='__TRUNK__'?`<button class="${AT.k===null?'sel':''}" onclick="atSel(null)">Tórax · Abdome</button>`:`<button class="${AT.k===k?'sel':''}" onclick="atSel('${k}')">${ATLAS[k].nome}</button>`;return `<div class="btn3d-bar" style="margin:0 0 8px;flex-wrap:wrap">${seq.map(btn).join('')}</div>`;}
 function atScout(){
  const A=ATLAS[AT.k],S=A.scout,w=S.w,h=S.h,e=AT.ex&&A.exams[AT.ex],cur=A.imgs[AT.i].y,fs=w/18,lw=Math.max(3,h/200);
  let ov='';
@@ -3334,10 +3334,47 @@ if(m&&Array.isArray(m._real)){
 }
 })();
 
+// Ordenação cranio-caudal (cabeça aos pés): exames na lista e cortes reais do guia de anatomia
+(function(){
+try{
+  // a) Exames: REGIONS reordenado in place
+  if(typeof REGIONS!=='undefined'&&Array.isArray(REGIONS)){
+    const ORD=['cranio','temporais','orbitas','seios','face','dentascan','pescoco','col_cerv','col_tor','col_tl','col_lomb','coccix','torax','tcar','baixa_dose','esterno','cint_esc','escapula','ombro','artro_aber','braco','cotovelo','antebraco','rud','punho','escafoide','mao','figado','abdome','entero','urotc','escanometria','torcao','quadril','coxa','joelho','perna','tornozelo','pe','angio_cerv','angio_tep','angio_aorta','angio_mmii'];
+    const orig=REGIONS.slice();
+    const listed=orig.filter(r=>ORD.includes(r.id)).sort((a,b)=>ORD.indexOf(a.id)-ORD.indexOf(b.id));
+    const out=listed.slice();
+    orig.forEach(r=>{
+      if(ORD.includes(r.id))return;
+      let idx=-1;
+      out.forEach((x,i)=>{if(x.grp===r.grp)idx=i;});
+      if(idx<0)out.push(r);else out.splice(idx+1,0,r);
+    });
+    REGIONS.length=0;
+    REGIONS.push(...out);
+  }
+  // b) Cortes reais do guia "anat": m._real reordenado in place
+  const m=(typeof GUIDE_MODS!=='undefined'&&Array.isArray(GUIDE_MODS))?GUIDE_MODS.find(x=>x.id==='anat'):null;
+  if(m&&Array.isArray(m._real)){
+    const ANAT_ORD=['cr_ax4','cr_ax3','ac_mip_ax','cr_cor2','cr_sag2','ea_ax3','ea_cor2','or_ax1','sn_ax1','sn_cor2','sn_sag2','nk_sag2','nk_ax3','ar_0','sh_ax3','sh_cor2','sh_sag3','wr_cor1','wr_ax_rad','wr_sag1','ar_1','ar_2','ar_3','ar_4','ar_5','ar_6','ar_7','ar_8','ar_9','lb_ax2','lb_sag2','ar_10','ar_11','ar_12','kn_ax2','kn_cor2','kn_sag2','an_cor2','ft_sag3'];
+    const A2=(typeof ANAT2!=='undefined'&&Array.isArray(ANAT2))?ANAT2:[];
+    const svgOf=t=>{if(t.indexOf('ar_')===0)return t;const j=A2.findIndex(a=>a&&a.k===t);return j<0?null:'a2_'+j;};
+    const ord=ANAT_ORD.map(svgOf).filter(s=>s!==null);
+    const pos=s=>{const i=ord.indexOf(s.svg);return i<0?1e6:i;};
+    const cur=m._real.slice();
+    const sorted=cur.slice().sort((a,b)=>pos(a)-pos(b)||cur.indexOf(a)-cur.indexOf(b));
+    m._real.length=0;
+    m._real.push(...sorted);
+    if(typeof ANAT_MODE!=='undefined'&&ANAT_MODE==='real')m.slides=m._real;
+  }
+}catch(e){
+  try{console.warn('ct_order',e);}catch(_){}
+}
+})();
+
 // ═══════════════════════════════════════════════════════════════
 //  POSICIONAMENTO EM TC — interface
 // ═══════════════════════════════════════════════════════════════
-const APP_NAME='Posicionamento em TC', APP_VER='1.23';
+const APP_NAME='Posicionamento em TC', APP_VER='1.24';
 const ICO={
  home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.2"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21"/></svg>',
  tri:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.6c0 4.5-3.2 8.2-7.5 9.4-4.3-1.2-7.5-4.9-7.5-9.4V6z"/><path d="M8.6 12.2l2.4 2.4 4.6-4.8"/></svg>',
