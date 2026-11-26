@@ -3086,9 +3086,24 @@ if(typeof i18nAdd==='function')i18nAdd({
  use('escafoide','v','hand','hap',[[20,40],[205,590],[265,690]],[60,180],[140,430],{only:[1],crop:[100,520,480,760]});
  use('escafoide','vl','handlat','hlat',[[20,60],[205,790],[265,900]],[80,170],[110,420],{only:[1],crop:[60,700,460,980]});
  if(typeof i18nAdd==='function')i18nAdd({});
- // tipo de cada plano MPR pelo nome: coronal, sagital ou axial
- const kind=n=>{n=(n||'').toLowerCase().split('—')[0];const k=[];if(/coronal|reformata/.test(n))k.push('cor');if(/sagital|reformata/.test(n))k.push('sag');return k.length?k.join(','):'ax';};
- REGIONS.forEach(r=>(r.planos||[]).forEach(p=>{const k=kind(p.nome);['v','vi','vl'].forEach(sd=>{if(p[sd]&&p[sd].mpr&&!p[sd].dir)p[sd]._k=k;});}));
+ // coluna lombar: separa o axial por disco do MPR coronal/sagital (cada plano mostra só as suas linhas)
+ (function(){const r=R('col_lomb');if(!r)return;const i=r.planos.findIndex(p=>/axial por disco/i.test(p.nome));if(i<0)return;
+  const p=r.planos[i],q=JSON.parse(JSON.stringify(p));
+  p.nome='MPR axial por disco';['v','vi','vl'].forEach(sd=>{if(p[sd]){p[sd].mpr=false;p[sd].label='AX por disco';}});
+  q.nome='MPR coronal e sagital';['v','vi','vl'].forEach(sd=>{if(q[sd])delete q[sd].discs;});
+  r.planos.splice(i+1,0,q);})();
+ // tipo de cada plano de reformatação pelo nome: coronal, sagital, axial ou só área (curvo/panorâmica)
+ const kind=nm=>{const full=(nm||'').toLowerCase();let n=full.split('—')[0];if(!/coronal|sagital|axial|mip|panor|paraxi|curvo|reformata|em y/.test(n))n=full;
+  const k=[];if(/coronal|reformata/.test(n))k.push('cor');if(/sagital|reformata|em y/.test(n))k.push('sag');
+  if(!k.length&&/mip/.test(n)){k.push('cor','sag');}
+  if(!k.length&&/panor|paraxi|curvo/.test(n))return 'area';
+  return k.length?k.join(','):'ax';};
+ const LATS=['lat','img_lat','img_head','img_ablat','img_wlat','img_pelat','latleg','armlat','handlat','img_qlat','img_klat','img_llat','img_alat','img_wlat2','img_hlat'];
+ REGIONS.forEach(r=>(r.planos||[]).forEach(p=>{const k=kind(p.nome);['v','vi','vl'].forEach(sd=>{const v=p[sd];if(!v||v.scout||v.dir||v.mon)return;
+  if(v.view==='img_fsag'||v.view==='foot'||v.view==='img_fax'||v.view==='footax'){   // pé: o plano paralelo à imagem vira só área
+   const sagImg=v.view==='img_fsag'||v.view==='foot';if((k==='sag'&&sagImg)||(k==='cor'&&!sagImg&&false))v._area=true;return;}
+  if(v.mpr||/reformata/i.test(p.nome)){if(k==='area'){v._area=true;v.mpr=false;}else{v.mpr=true;v._k=k;}}
+ });}));
 })();
 
 // Resultado esperado: imagens reais (axial, coronal, sagital, 3D) no fim do exame e de cada plano
@@ -3149,7 +3164,7 @@ if(typeof i18nAdd==='function')i18nAdd({
 // ═══════════════════════════════════════════════════════════════
 //  POSICIONAMENTO EM TC — interface
 // ═══════════════════════════════════════════════════════════════
-const APP_NAME='Posicionamento em TC', APP_VER='1.14';
+const APP_NAME='Posicionamento em TC', APP_VER='1.15';
 const ICO={
  home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.2"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21"/></svg>',
  tri:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.6c0 4.5-3.2 8.2-7.5 9.4-4.3-1.2-7.5-4.9-7.5-9.4V6z"/><path d="M8.6 12.2l2.4 2.4 4.6-4.8"/></svg>',
@@ -3328,6 +3343,10 @@ function scoutSVG(v,col,big){
   ov+=`<g${v.tilt?` transform="rotate(${v.tilt} ${cxv} ${cyv})"`:''}>${g}</g>`;
   ov+=tag(sx,y0+fs*3.4,'▶ INÍCIO',c,sx>ex?'start':'end')+tag(ex,y0+fs*3.4,'■ FIM',c,sx>ex?'end':'start');
   ov+=tag(x0+W*.04,y1-fs*.8,'MPR · '+(v.label||'')+' ≈ '+fmt((e-s)*SC_CM[v.view])+' cm',c);
+ } else if(v._area){
+  // reformatação que não aparece como linhas neste topograma (paralela à imagem, curva ou panorâmica): só a área coberta
+  ov+=`<rect x="${xa}" y="${s}" width="${xb-xa}" height="${e-s}" fill="${c}" fill-opacity=".06" stroke="${c}" stroke-width="${sw}" stroke-dasharray="${5*u} ${4*u}"/>`;
+  ov+=tag(x0+W*.04,y1-fs*.8,'MPR · '+(v.label&&!/AX/.test(v.label)?v.label+' · ':'')+'área coberta',c);
  } else if(v.mpr&&v._k&&v._k!=='ax'){
   // coronal / sagital: linhas no próprio plano (verticais), com início e fim, como nos cortes axiais
   const LATV=['lat','img_lat','img_head','img_ablat','img_wlat','img_pelat','latleg','armlat','handlat','img_qlat','img_klat','img_llat','img_alat','img_wlat2','img_hlat','foot','img_fsag'];
@@ -3373,6 +3392,7 @@ function scoutSVG(v,col,big){
    const ty=(y,below)=>{let t=below?y+fs*1.4:y-fs*.4;if(t>y1-fs*3.4)t=Math.min(y-fs*.6,y1-fs*3.4);if(t<y0+fs*3.4)t=y+fs*1.5;return t;};ov+=tag(Math.min(xb+6*u,x1-60*u),ty(sy,v.s>v.e),'▶ INÍCIO',c)+tag(Math.min(xb+6*u,x1-60*u),ty(ey,v.s<=v.e),'■ FIM',c);
    ov+=tag(x0+W*.04,y1-fs*.8,(v.label?'MPR · '+v.label:(v.axial?'AXIAL':'HELICOIDAL'))+' ≈ '+fmt((e-s)*SC_CM[v.view])+' cm'+(v.tilt&&!v.label?' · TILT '+v.tilt+'°':''),c);
    if(v.phases)ov+=tag(xa+4*u,s+(e-s)*.22,v.phases.join(' → '),'#c39bff');
+   if(v.discs)(Array.isArray(v.discs)?v.discs:[[435,-8],[457,-14],[478,-24]]).forEach(([y,a])=>{const dw=v.dw||34;ov+=`<line x1="${cx-dw}" y1="${y}" x2="${cx+dw}" y2="${y}" stroke="#2cf2a3" stroke-width="${sw*1.6}" transform="rotate(${a} ${cx} ${y})"/>`;});
   }
  }
  const vlab={lat:'LAT 90°',img_lat:'LAT 90°',img_head:'LAT 90°',img_ablat:'LAT 90°',img_wlat:'LAT 90°',img_pelat:'LAT 90°',latleg:'LAT 90°',armlat:'LAT 90°',handlat:'LAT 90°',foot:'SAG (MPR)',footax:'AX (MPR)',hand:'PA 0°'}[v.view]||'AP 0°';
