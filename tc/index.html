@@ -689,6 +689,18 @@ button:focus-visible,.region-item:focus-visible,.plane-item:focus-visible{outlin
 .res-ov figcaption{color:#cfe8f5;font-size:14px;margin-top:10px}
 </style>
 
+<style>
+.anx-box{padding:0 16px 8px}
+.anx-card{background:var(--surface-solid,var(--surface,#fff));color:var(--fg,inherit);box-shadow:var(--shadow,none);border:1px solid var(--border,#1e3a52);border-radius:12px;padding:10px;margin:8px 0}
+.anx-t{font-weight:600;margin:0 0 6px}
+.anx-dot{position:absolute;transform:translate(-50%,-50%);min-width:20px;height:20px;border-radius:10px;background:#00e5ff;color:#001018;font:700 11px/20px 'Share Tech Mono',monospace;text-align:center;box-shadow:0 0 0 2px rgba(0,0,0,.6);cursor:pointer}
+.anx-dot.on{background:#ffbe3c;transform:translate(-50%,-50%) scale(1.35);z-index:2}
+.anx-leg{margin:8px 0 4px;padding-left:22px;columns:2;column-gap:14px;font-size:13px}
+.anx-leg li{cursor:pointer;margin:2px 0}
+.anx-leg li.on{color:#ffbe3c;font-weight:600}
+.anx-n{font-size:12px;color:var(--fg2,inherit);margin:4px 0 0}
+</style>
+
 <div id="app">
 <header class="hdr" id="mainHdr"><span class="hdr-title">Posicionamento em TC</span></header>
 <main class="main">
@@ -3382,10 +3394,156 @@ try{
 }
 })();
 
+/* Anatomia real do exame: cartões com imagens rotuladas, logo abaixo da legenda de marcações do plano */
+(function(){
+'use strict';
+var MAP={
+cranio:['cr_ax4','cr_ax3','cr_cor2','cr_sag2'],
+angio_cerv:['ac_mip_ax','cr_ax3','nk_ax3','nk_sag2'],
+temporais:['ea_ax3','ea_cor2'],
+orbitas:['or_ax1','sn_cor2'],
+seios:['sn_ax1','sn_cor2','sn_sag2'],
+face:['sn_ax1','sn_cor2','sn_sag2','or_ax1'],
+dentascan:['sn_ax1','sn_sag2'],
+pescoco:['nk_ax3','nk_sag2','cc_ax2'],
+col_cerv:['cc_ax2','cc_sag2','cc_cor1'],
+col_tor:['tt_ax3','tt_sag2'],
+col_tl:['tt_sag2','lb_sag2','ar_7'],
+col_lomb:['lb_ax2','lb_sag2'],
+coccix:['lb_sag2','ar_10','ar_11'],
+torax:['ar_1','ar_2','ar_3','ar_4','ar_5','ar_6'],
+tcar:['ar_1','ar_2','ar_3','ar_4','ar_5','ar_6'],
+baixa_dose:['ar_1','ar_2','ar_3','ar_4','ar_5','ar_6'],
+angio_tep:['ar_2','ar_3','ar_4','ar_5'],
+angio_aorta:['ar_2','ar_4','ar_7','ar_8','ar_9'],
+esterno:['ar_1','ar_2','tt_sag2'],
+cint_esc:['ar_0','sh_ax3','sh_cor2'],
+escapula:['sh_ax3','sh_cor2','sh_sag3'],
+ombro:['sh_ax3','sh_cor2','sh_sag3'],
+artro_aber:['sh_ax3','sh_cor2','sh_sag3'],
+braco:['sh_cor2'],
+antebraco:['wr_ax_rad'],
+punho:['wr_cor1','wr_ax_rad','wr_sag1'],
+escafoide:['wr_cor1','wr_ax_rad','wr_sag1'],
+rud:['wr_cor1','wr_ax_rad','wr_sag1'],
+mao:['wr_cor1','wr_ax_rad','wr_sag1'],
+abdome:['ar_7','ar_8','ar_9','ar_10','ar_11','ar_12'],
+figado:['ar_6','ar_7','ar_8'],
+urotc:['ar_8','ar_9','ar_11'],
+entero:['ar_8','ar_9','ar_10'],
+angio_mmii:['ar_9','ar_11','kn_ax2'],
+quadril:['ar_10','ar_11','ar_12'],
+coxa:['ar_12'],
+joelho:['kn_ax2','kn_cor2','kn_sag2'],
+perna:['kn_cor2'],
+torcao:['ar_11','kn_ax2','an_cor2'],
+escanometria:['ar_11','kn_cor2','an_cor2'],
+tornozelo:['an_cor2','ft_sag3'],
+pe:['ft_sag3','an_cor2']
+};
+
+function esc(s){
+  return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function ori(ref){
+  if(/^ar_/.test(ref)) return 'ax';
+  if(/_ax|mip/.test(ref)) return 'ax';
+  if(/_cor/.test(ref)) return 'cor';
+  if(/_sag/.test(ref)) return 'sag';
+  return '';
+}
+
+function resolve(ref){
+  var m=/^ar_(\d+)$/.exec(ref);
+  if(m){
+    if(typeof RANAT==='undefined') return null;
+    var s=RANAT[+m[1]];
+    if(!s) return null;
+    if(typeof REAL==='undefined'||!REAL[s.k]||!REAL[s.k].imgs) return null;
+    var im=REAL[s.k].imgs[s.i];
+    if(!im||!im.src) return null;
+    return {src:im.src,t:s.t,n:s.n,lab:s.lab||[],w:440,h:s.k==='s2'?292:334,o:'ax'};
+  }
+  if(typeof ANAT2==='undefined') return null;
+  var a=null;
+  for(var i=0;i<ANAT2.length;i++){ if(ANAT2[i].k===ref){ a=ANAT2[i]; break; } }
+  if(!a) return null;
+  var u=window.RES_IMG&&window.RES_IMG[a.k];
+  if(!u) return null;
+  return {src:u,t:a.t,n:a.n,lab:a.lab||[],w:a.w,h:a.h,o:ori(ref)};
+}
+
+function planeOri(nome){
+  var s={};
+  var n=String(nome||'').toLowerCase();
+  if(/topograma/.test(n)) return {ax:1,cor:1,sag:1};
+  if(/axial|helicoidal|aquisi|supina|prona|volum/.test(n)) s.ax=1;
+  if(/coronal/.test(n)) s.cor=1;
+  if(/sagital/.test(n)) s.sag=1;
+  if(/reformata|mpr|3d|vr|mip|pós-proces|pos-proces/.test(n)) s.ax=s.cor=s.sag=1;
+  return s;
+}
+
+function card(s){
+  var dots='',lis='';
+  for(var i=0;i<s.lab.length;i++){
+    var L=s.lab[i];
+    var X=(L[1]/s.w*100).toFixed(2), Y=(L[2]/s.h*100).toFixed(2);
+    dots+='<span class="anx-dot" data-i="'+i+'" style="left:'+X+'%;top:'+Y+'%">'+(i+1)+'</span>';
+    lis+='<li data-i="'+i+'">'+esc(L[0])+'</li>';
+  }
+  var note=esc(s.n||'');
+  if(s.o!=='sag') note+=' Lado direito do paciente à esquerda do observador.';
+  return '<div class="anx-card"><div class="anx-t">'+esc(s.t)+'</div>'+
+    '<div class="anx-img" style="position:relative"><img src="'+esc(s.src)+'" alt="'+esc(s.t)+'" style="display:block;width:100%;height:auto;border-radius:10px;background:#000">'+dots+'</div>'+
+    '<ol class="anx-leg">'+lis+'</ol>'+
+    '<p class="anx-n">'+note+'</p></div>';
+}
+
+function inject(r,pi){
+  var scr=document.getElementById('planeScreen');
+  if(!scr) return;
+  var old=scr.querySelector('.anx-box');
+  if(old) old.parentNode.removeChild(old);
+  var leg=scr.querySelector('.ct-legend');
+  if(!leg || !r || !MAP.hasOwnProperty(r.id)) return;
+  var refs=MAP[r.id];
+  var slides=[];
+  for(var i=0;i<refs.length;i++){ var s=resolve(refs[i]); if(s) slides.push(s); }
+  if(!slides.length) return;
+  var plano=(r.planos&&r.planos[pi])||{};
+  var S=planeOri(plano.nome);
+  var match=slides.filter(function(s){return S[s.o];});
+  var rest=slides.filter(function(s){return !S[s.o];});
+  var list=match.concat(rest).slice(0,4);
+  var box=document.createElement('div');
+  box.className='anx-box';
+  box.innerHTML='<div class="sec-label">Anatomia deste exame</div>'+list.map(card).join('');
+  leg.insertAdjacentElement('afterend',box);
+  box.addEventListener('click',function(e){
+    var el=e.target.closest?e.target.closest('[data-i]'):null;
+    if(!el||!box.contains(el)) return;
+    var c=el.closest('.anx-card');
+    if(!c) return;
+    var idx=el.getAttribute('data-i');
+    var on=!el.classList.contains('on');
+    var nodes=c.querySelectorAll('.anx-dot[data-i="'+idx+'"], .anx-leg li[data-i="'+idx+'"]');
+    for(var j=0;j<nodes.length;j++){ if(on) nodes[j].classList.add('on'); else nodes[j].classList.remove('on'); }
+  });
+}
+
+var _rp=window.renderPlane;
+window.renderPlane=function(r,pi){
+  _rp.apply(this,arguments);
+  try{ inject(r,pi); }catch(e){}
+};
+})();
+
 // ═══════════════════════════════════════════════════════════════
 //  POSICIONAMENTO EM TC — interface
 // ═══════════════════════════════════════════════════════════════
-const APP_NAME='Posicionamento em TC', APP_VER='1.25';
+const APP_NAME='Posicionamento em TC', APP_VER='1.26';
 const ICO={
  home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.2"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21"/></svg>',
  tri:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.6c0 4.5-3.2 8.2-7.5 9.4-4.3-1.2-7.5-4.9-7.5-9.4V6z"/><path d="M8.6 12.2l2.4 2.4 4.6-4.8"/></svg>',
