@@ -3093,6 +3093,14 @@ if(typeof i18nAdd==='function')i18nAdd({
   q.nome='MPR coronal e sagital';['v','vi','vl'].forEach(sd=>{if(q[sd])delete q[sd].discs;});
   r.planos.splice(i+1,0,q);})();
  // tipo de cada plano de reformatação pelo nome: coronal, sagital, axial ou só área (curvo/panorâmica)
+// perfil real (lateral corpo inteiro) para ombro, artro ABER, braço, cotovelo e antebraço
+ (function(){const W=c=>o=>Object.assign({view:'img_wlat',crop:c},o);const set=(id,a)=>{const r=R(id);if(r)a.forEach((v,i)=>{if(v&&r.planos[i])r.planos[i].vl=v;});};
+  const So=W([140,150,560,520]),Sb=W([140,150,600,760]),Se=W([330,470,600,820]),Sf=W([330,540,600,1090]);
+  set('ombro',[So({s:190,e:470,scout:true}),So({s:215,e:410,x:[200,480]}),So({s:215,e:410,x:[200,480],mpr:true}),So({s:215,e:410,x:[200,480],mpr:true})]);
+  set('artro_aber',[So({s:190,e:470,scout:true}),So({s:215,e:420,x:[200,480]})]);
+  set('braco',[Sb({s:190,e:740,scout:true}),Sb({s:220,e:680,x:[200,580]}),Sb({s:220,e:680,x:[200,580],mpr:true})]);
+  set('cotovelo',[Se({s:520,e:780,scout:true}),Se({s:575,e:715,x:[400,600]}),Se({s:575,e:715,x:[400,600],mpr:true})]);
+  set('antebraco',[Sf({s:600,e:1060,scout:true}),Sf({s:625,e:1010,x:[430,600]}),Sf({s:625,e:1010,x:[430,600],mpr:true})]);})();
  const kind=nm=>{const full=(nm||'').toLowerCase();let n=full.split('—')[0];if(!/coronal|sagital|axial|mip|panor|paraxi|curvo|reformata|em y/.test(n))n=full;
   const k=[];if(/coronal|reformata/.test(n))k.push('cor');if(/sagital|reformata|em y/.test(n))k.push('sag');
   if(!k.length&&/mip/.test(n)){k.push('cor','sag');}
@@ -3164,7 +3172,7 @@ if(typeof i18nAdd==='function')i18nAdd({
 // ═══════════════════════════════════════════════════════════════
 //  POSICIONAMENTO EM TC — interface
 // ═══════════════════════════════════════════════════════════════
-const APP_NAME='Posicionamento em TC', APP_VER='1.15';
+const APP_NAME='Posicionamento em TC', APP_VER='1.16';
 const ICO={
  home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.2"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21"/></svg>',
  tri:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.6c0 4.5-3.2 8.2-7.5 9.4-4.3-1.2-7.5-4.9-7.5-9.4V6z"/><path d="M8.6 12.2l2.4 2.4 4.6-4.8"/></svg>',
